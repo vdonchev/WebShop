@@ -1,10 +1,12 @@
-<nav class="nav nav-tabs">
-    <ul class="nav navbar-nav">
-        {% block nav_admin %}
-            <li><a href="#">Edit Products</a></li>
-            <li><a href="#">Edit Categories</a></li>
-            <li><a href="#">Edit Promotions</a></li>
-            <li><a href="#">Edit Users</a></li>
-        {% endblock %}
-    </ul>
-</nav>
+{% if is_granted("ROLE_EDITOR") %}
+    <nav class="nav nav-tabs">
+        <ul class="nav navbar-nav">
+            {% block nav_admin %}
+                <li><a href="#">Edit Products</a></li>
+                <li><a href="#">Edit Categories</a></li>
+                <li><a href="#">Edit Promotions</a></li>
+                <li><a href="#">Edit Users</a></li>
+            {% endblock %}
+        </ul>
+    </nav>
+{% endif %}
