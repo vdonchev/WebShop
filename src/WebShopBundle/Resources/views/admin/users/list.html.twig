@@ -1,0 +1,41 @@
+{% extends "@WebShop/base.html.twig" %}
+
+{% block main_title %}View users{% endblock %}
+
+{% block main %}
+    <table class="table table-responsive table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Email</th>
+            <th>Full Name</th>
+            <th>Funds</th>
+            <th>Roles</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.fullName }}</td>
+                <td>{{ user.funds }}</td>
+                <td>{{ user.roles|roles }}</td>
+                <td>
+                    <a href="{{ path("admin_edit_user", {"id": user.id}) }}" class="btn btn-warning">Edit</a>
+                </td>
+                <td>
+                    <form action="{{ path("admin_delete_user", {"id": user.id}) }}" method="post">
+                        <button class="btn btn-danger delete-item" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <a href="{{ path("admin_add_user") }}" class="btn btn-success">Add new user <span
+                class="glyphicon glyphicon-plus-sign"></span></a>
+{% endblock %}

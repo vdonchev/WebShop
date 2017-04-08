@@ -29,12 +29,24 @@ class User implements UserInterface
     private $email;
 
     /**
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255)
+     */
+    private $fullName;
+
+    /**
+     * @ORM\Column(type="decimal", precision=14, scale=2, options={"default": 0})
+     * @Assert\Range(min="0", max="100000")
+     */
+    private $funds;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $password;
 
     /**
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"Registration"})
      */
     private $plainPassword;
 
@@ -42,6 +54,11 @@ class User implements UserInterface
      * @ORM\Column(type="json_array")
      */
     private $roles = [];
+
+    public function __construct()
+    {
+        $this->funds = 5000.0;
+    }
 
     public function getUsername()
     {
@@ -115,6 +132,30 @@ class User implements UserInterface
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getFullName()
+    {
+        return $this->fullName;
+    }
+
+    public function setFullName($fullName)
+    {
+        $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    public function getFunds()
+    {
+        return $this->funds;
+    }
+
+    public function setFunds($funds)
+    {
+        $this->funds = $funds;
 
         return $this;
     }

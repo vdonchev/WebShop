@@ -6,6 +6,7 @@
     {{ form_start(register_form) }}
 
     {{ form_row(register_form.email) }}
+    {{ form_row(register_form.fullName) }}
     {{ form_row(register_form.plainPassword.first, {
         label: "Password"
     }) }}

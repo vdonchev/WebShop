@@ -5,7 +5,9 @@
                 <li><a href="#">Edit Products</a></li>
                 <li><a href="#">Edit Categories</a></li>
                 <li><a href="#">Edit Promotions</a></li>
-                <li><a href="#">Edit Users</a></li>
+                {% if is_granted("ROLE_ADMIN") %}
+                    <li><a href="{{ path("admin_list_users") }}">Edit Users</a></li>
+                {% endif %}
             {% endblock %}
         </ul>
     </nav>

@@ -12,3 +12,11 @@ services:
         autowire: true
         tags:
             - { name: doctrine.event_subscriber }
+
+    # Twig
+    web_shop.twig.web_shop_extension:
+        class: WebShopBundle\Twig\WebShopExtension
+        calls:
+            - [initRuntime, ['@twig']]
+        tags:
+            - { name: twig.extension }

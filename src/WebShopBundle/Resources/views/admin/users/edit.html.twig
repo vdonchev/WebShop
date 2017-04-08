@@ -1,0 +1,25 @@
+{% extends '@WebShop/base.html.twig' %}
+
+{% block main_title %}Edit user{% endblock %}
+
+{% block main %}
+    {{ form_start(edit_form) }}
+
+    {{ form_row(edit_form.email) }}
+    {{ form_row(edit_form.fullName) }}
+    {{ form_row(edit_form.funds) }}
+    {{ form_row(edit_form.roles) }}
+    <hr>
+    {{ form_row(edit_form.plainPassword.first, {
+        label: "New Password"
+    }) }}
+    {{ form_row(edit_form.plainPassword.second, {
+        label: "New Password Repeated"
+    }) }}
+
+    <button class="btn btn-warning" formnovalidate>Edit <span class="glyphicon glyphicon-edit"></span>
+    </button>
+
+    {{ form_end(edit_form) }}
+{% endblock %}
+
