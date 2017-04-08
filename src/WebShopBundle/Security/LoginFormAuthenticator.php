@@ -4,6 +4,7 @@ namespace WebShopBundle\Security;
 
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,17 +25,20 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $entityManager;
     private $router;
     private $passwordEncoder;
+    private $container;
 
     public function __construct(
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
         RouterInterface $router,
-        UserPasswordEncoder $passwordEncoder)
+        UserPasswordEncoder $passwordEncoder,
+        ContainerInterface $container)
     {
         $this->formFactory = $formFactory;
         $this->entityManager = $entityManager;
         $this->router = $router;
         $this->passwordEncoder = $passwordEncoder;
+        $this->container = $container;
     }
 
     public function getCredentials(Request $request)
@@ -83,6 +87,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        $this->container->get("session")->getFlashBag()->add("success", "Logged in successfully!");
+
         $url = $this->router->generate('homepage');
         return new RedirectResponse($url);
     }

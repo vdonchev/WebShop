@@ -52,8 +52,6 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash("success", "Registrations successful");
-
             return $this->get("security.authentication.guard_handler")
                 ->authenticateUserAndHandleSuccess(
                     $user,

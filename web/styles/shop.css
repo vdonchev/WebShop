@@ -7,3 +7,7 @@ body {
 .navbar {
     margin-bottom: 20px;
 }
+
+.nav-tabs {
+    margin-bottom: 10px;
+}
