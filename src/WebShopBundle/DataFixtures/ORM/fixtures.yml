@@ -1,0 +1,13 @@
+WebShopBundle\Entity\UserRole:
+    userRole_1:
+        name: "ROLE_USER"
+    userRole_2:
+        name: "ROLE_EDITOR"
+    userRole_3:
+        name: "ROLE_ADMIN"
+
+WebShopBundle\Entity\User:
+    user_1:
+        email: info@videlin.eu
+        plainPassword: 123
+        roles: ["ROLE_ADMIN"]

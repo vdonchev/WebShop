@@ -1,4 +1,14 @@
 services:
-#    web_shop.example:
-#        class: WebShopBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    web_shop.security.login_form_authenticator:
+        class: WebShopBundle\Security\LoginFormAuthenticator
+        autowire: true
+        calls:
+            - [createAuthenticatedToken, ['@security.user.provider.in_memory.user', '@?']]
+            - [getUser, ['@?', '@security.user.provider.ldap']]
+            - [checkCredentials, ['@?', '@security.user.provider.in_memory.user']]
+
+    web_shop.doctrine.hash_password_listener:
+        class: WebShopBundle\Doctrine\HashPasswordListener
+        autowire: true
+        tags:
+            - { name: doctrine.event_subscriber }
