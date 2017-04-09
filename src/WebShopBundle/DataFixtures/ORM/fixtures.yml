@@ -25,3 +25,25 @@ WebShopBundle\Entity\User:
         plainPassword: 123
         funds: <randomFloat(2, 1000, 100000)>
         role: ["@role_1"]
+
+WebShopBundle\Entity\ProductCategory:
+    productCategory_1:
+        name: Books
+    productCategory_2:
+        name: Games
+    productCategory_3:
+        name: TV
+    productCategory_4:
+        name: Photo
+    productCategory_5:
+        name: Auto Accessoirs
+    productCategory_6:
+        name: Computers
+    productCategory_7:
+        name: Smart Phones
+    productCategory_8:
+        name: Notebooks
+    productCategory_9:
+        name: Audio
+    productCategory_10:
+        name: Electronics
