@@ -23,7 +23,7 @@
 
                 {% if app.user %}
                     {% block nav_user %}
-                        <li><a href="#">My Profile <span class="glyphicon glyphicon-user"></span></a></li>
+                        <li><a href="{{ path("user_profile") }}">My Profile <span class="glyphicon glyphicon-user"></span></a></li>
                         <li><a href="#">Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                         <li><a href="{{ path("security_logout") }}">Logout <span
                                         class="glyphicon glyphicon-arrow-right"></span></a></li>

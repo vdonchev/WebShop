@@ -4,11 +4,13 @@ namespace WebShopBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WebShopBundle\Entity\Role;
 use WebShopBundle\Entity\User;
+use WebShopBundle\Form\ProfileEditForm;
 use WebShopBundle\Form\RegisterForm;
 
 class UserController extends Controller
@@ -34,6 +36,7 @@ class UserController extends Controller
     /**
      * @Route("/register", name="user_register_process")
      * @Method("POST")
+     *
      * @param Request $request
      * @return Response
      */
@@ -71,6 +74,49 @@ class UserController extends Controller
 
         return $this->render("@WebShop/user/register.html.twig", [
             "register_form" => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/profile", name="user_profile")
+     * @Security(expression="is_granted('IS_AUTHENTICATED_FULLY')")
+     */
+    public function profileAction()
+    {
+        /** @var User $currentUser */
+        $currentUser = $this->getUser();
+        return $this->render("@WebShop/user/profile.html.twig", [
+            "user" => $currentUser
+        ]);
+    }
+
+    /**
+     * @Route("/profile/edit", name="user_profile_edit")
+     * @Security(expression="is_granted('IS_AUTHENTICATED_FULLY')")
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function editProfileAction(Request $request)
+    {
+        /** @var User $currentUser */
+        $currentUser = $this->getUser();
+
+        $form = $this->createForm(ProfileEditForm::class, $currentUser);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($currentUser);
+            $em->flush();
+
+            $this->addFlash("success", "Profile updated!");
+
+            return $this->redirectToRoute("user_profile");
+        }
+
+        return $this->render("@WebShop/user/edit.html.twig", [
+            "edit_form" => $form->createView()
         ]);
     }
 }
