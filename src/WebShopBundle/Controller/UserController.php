@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use WebShopBundle\Entity\Role;
 use WebShopBundle\Entity\User;
 use WebShopBundle\Form\RegisterForm;
 
@@ -42,7 +43,14 @@ class UserController extends Controller
             return $this->redirectToRoute("homepage");
         }
 
-        $form = $this->createForm(RegisterForm::class);
+        $user = new User();
+        $em = $this->getDoctrine()->getManager();
+        $userRole = $em->getRepository(Role::class)
+            ->findOneBy(["name" => "ROLE_USER"]);
+
+        $user->addRole($userRole);
+
+        $form = $this->createForm(RegisterForm::class, $user);
         $form->handleRequest($request);
         if ($form->isValid()) {
             /** @var User $user */

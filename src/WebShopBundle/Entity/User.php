@@ -2,6 +2,7 @@
 
 namespace WebShopBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -35,7 +36,7 @@ class User implements UserInterface
     private $fullName;
 
     /**
-     * @ORM\Column(type="decimal", precision=14, scale=2, options={"default": 0})
+     * @ORM\Column(type="decimal", precision=14, scale=2)
      * @Assert\Range(min="0", max="100000")
      */
     private $funds;
@@ -51,13 +52,20 @@ class User implements UserInterface
     private $plainPassword;
 
     /**
-     * @ORM\Column(type="json_array")
+     * @var Role[]|ArrayCollection
+     *
+     * @Assert\Count(min="1")
+     *
+     * @ORM\ManyToMany(targetEntity="WebShopBundle\Entity\Role", inversedBy="users")
+     * @ORM\JoinTable(name="users_roles")
      */
-    private $roles = [];
+    private $roles;
 
     public function __construct()
     {
-        $this->funds = 5000.0;
+        $this->roles = new ArrayCollection();
+
+        $this->funds = 2000;
     }
 
     public function getUsername()
@@ -67,12 +75,14 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        $roles = $this->roles;
-        if (!in_array("ROLE_USER", $roles)) {
-            $roles[] = "ROLE_USER";
-        }
+        return $this->roles->toArray();
+    }
 
-        return $roles;
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     public function getPassword()
@@ -117,13 +127,6 @@ class User implements UserInterface
         $this->password = null;
     }
 
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
     public function getEmail()
     {
         return $this->email;
@@ -158,5 +161,10 @@ class User implements UserInterface
         $this->funds = $funds;
 
         return $this;
+    }
+
+    public function addRole(Role $role)
+    {
+        $this->roles[] = $role;
     }
 }

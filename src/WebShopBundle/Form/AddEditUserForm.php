@@ -2,12 +2,14 @@
 
 namespace WebShopBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use WebShopBundle\Entity\Role;
 use WebShopBundle\Entity\User;
 
 class AddEditUserForm extends AbstractType
@@ -18,12 +20,8 @@ class AddEditUserForm extends AbstractType
             ->add("email")
             ->add("fullName")
             ->add("funds")
-            ->add("roles", ChoiceType::class, [
-                "choices" => [
-                    "Admin" => "ROLE_ADMIN",
-                    "Editor" => "ROLE_EDITOR",
-                    "User" => "ROLE_USER",
-                ],
+            ->add("roles", EntityType::class, [
+                "class" => 'WebShopBundle\Entity\Role',
                 "multiple" => true,
                 "expanded" => true
             ])

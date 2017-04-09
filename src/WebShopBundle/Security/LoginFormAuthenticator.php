@@ -6,12 +6,9 @@ namespace WebShopBundle\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -27,6 +24,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $passwordEncoder;
     private $container;
 
+    /**
+     * LoginFormAuthenticator constructor.
+     * @param FormFactoryInterface $formFactory
+     * @param EntityManagerInterface $entityManager
+     * @param UserPasswordEncoder $passwordEncoder
+     */
     public function __construct(
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
@@ -74,6 +77,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         $password = $credentials["_password"];
         if ($this->passwordEncoder->isPasswordValid($user, $password)) {
+            $this->container->get("session")->getFlashBag()->add("success", "Logged in successfully!");
             return true;
         }
 
@@ -85,18 +89,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $this->router->generate("security_login");
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    protected function getDefaultSuccessRedirectUrl()
     {
-        $this->container->get("session")->getFlashBag()->add("success", "Logged in successfully!");
-
-        $url = $this->router->generate('homepage');
-        return new RedirectResponse($url);
-    }
-
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
-    {
-        $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
-        $url = $this->router->generate("security_login");
-        return new RedirectResponse($url);
+        return $this->router->generate('homepage');
     }
 }

@@ -1,18 +1,27 @@
+WebShopBundle\Entity\Role:
+    role_1:
+        name: ROLE_USER
+    role_2:
+        name: ROLE_EDITOR
+    role_3:
+        name: ROLE_ADMIN
+
 WebShopBundle\Entity\User:
     user_1:
         email: admin@videlin.eu
         plainPassword: 123
         fullName: Admin Account
-        roles: ["ROLE_ADMIN"]
         funds: <randomFloat(2, 5000, 100000)>
+        role: ["@role_3", "@role_2"]
     user_2:
         email: editor@videlin.eu
         plainPassword: 123
         fullName: "Editor Account"
-        roles: ["ROLE_EDITOR"]
         funds: <randomFloat(2, 5000, 100000)>
+        role: ["@role_2"]
     user_{3..10}:
         email: <email()>
         fullName: <name()>
         plainPassword: 123
         funds: <randomFloat(2, 1000, 100000)>
+        role: ["@role_1"]
