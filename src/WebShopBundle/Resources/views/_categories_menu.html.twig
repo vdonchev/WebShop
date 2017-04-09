@@ -1,0 +1,15 @@
+<h1 class="h4"></h1>
+<ul class="list-group">
+    <li class="list-group-item active">Product Categories</li>
+    {% if categories|length > 0 %}
+        {% for cat in categories %}
+            <li class="list-group-item">
+                <span class="badge">{{ cat.products|length }}</span>
+                <a href="#">{{ cat.name }}</a>
+            </li>
+        {% endfor %}
+    {% else %}
+        <li class="text-muted">No categories</li>
+    {% endif %}
+</ul>
+
