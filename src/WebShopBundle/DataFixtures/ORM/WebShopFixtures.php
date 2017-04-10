@@ -40,4 +40,18 @@ class WebShopFixtures implements FixtureInterface
 
         return $products[array_rand($products)];
     }
+
+    public function productImage()
+    {
+        $images = [
+            "static/products/01.png",
+            "static/products/02.png",
+            "static/products/03.png",
+            "static/products/04.jpg",
+            "static/products/05.png",
+            "static/products/06.jpg",
+        ];
+
+        return $images[array_rand($images)];
+    }
 }

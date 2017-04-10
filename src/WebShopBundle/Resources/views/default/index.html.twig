@@ -1,5 +1,26 @@
 {% extends "@WebShop/base.html.twig" %}
 
+{% block main_title %}Latest {{ products|length }} products{% endblock %}
+
 {% block main %}
-    {{ dump(products) }}
+    {% if products|length > 0 %}
+        {% for index,product in products %}
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="{{ asset(product.image) }}" alt="{{ product.name }}">
+                    <div class="caption">
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.description }}</p>
+                        <div class="h2"><span class="label label-success">€{{ product.price }}</span></div>
+                        <hr>
+                        <p>
+                            <a href="#" class="btn btn-primary" role="button"><span
+                                        class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</a>
+                            <a href="#" class="btn btn-default" role="button">View details</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

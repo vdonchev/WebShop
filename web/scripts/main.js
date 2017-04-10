@@ -8,4 +8,11 @@ $(function () {
             }
         });
     });
+
+    // Auto fix thumbnail heights
+    $(".thumbnail").height(Math.max.apply(null, $(".thumbnail").map(function () {
+        return $(this).height();
+    })));
 });
+
+
