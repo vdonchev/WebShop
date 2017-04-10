@@ -2,7 +2,7 @@
     <nav class="nav nav-tabs">
         <ul class="nav navbar-nav">
             {% block nav_admin %}
-                <li><a href="#">Edit Products</a></li>
+                <li><a href="{{ path("admin_list_products") }}">Edit Products</a></li>
                 <li><a href="{{ path("admin_list_categories") }}">Edit Categories</a></li>
                 <li><a href="#">Edit Promotions</a></li>
                 {% if is_granted("ROLE_ADMIN") %}

@@ -71,3 +71,13 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+# VichUploadBundle Configuration
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        product_image:
+            uri_prefix: /static/products
+            upload_destination: '%kernel.root_dir%/../web/static/products'
+            namer: vich_uploader.namer_uniqid

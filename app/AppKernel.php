@@ -18,6 +18,7 @@ class AppKernel extends Kernel
 
             // Project specific bundles
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
             new WebShopBundle\WebShopBundle(),
         ];
 

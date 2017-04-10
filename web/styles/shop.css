@@ -11,3 +11,7 @@ body {
 .nav-tabs {
     margin-bottom: 10px;
 }
+
+img.admin-image {
+   max-width: 100px;
+}

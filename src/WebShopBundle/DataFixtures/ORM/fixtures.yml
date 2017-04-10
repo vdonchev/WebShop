@@ -52,7 +52,8 @@ WebShopBundle\Entity\Product:
     product_{1..20}:
         name: <product()> (<current()>)
         description: <paragraph()>
-        image: <word()>.jpg
+        imageName: <productImage()>
         quantity: <numberBetween(0, 99)>
         price: <randomFloat(2, 0.99, 1999)>
         category: '@productCategory_*'
+        updatedAt: <datetime()>

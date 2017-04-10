@@ -1,0 +1,50 @@
+{% extends '@WebShop/base.html.twig' %}
+
+{% block main_title %}Products{% endblock %}
+
+{% block main %}
+    <table class="table table-responsive table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if products|length > 0 %}
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td><img src="{{ vich_uploader_asset(product, "imageFile") }}" class="admin-image"
+                             alt="Product Image"></td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>
+                        <a href="{{ path("admin_edit_product", {"id": product.id}) }}"
+                           class="btn btn-warning">Edit</a>
+                    </td>
+                    <td>
+                        <form action="{{ path("admin_delete_product", {"id": product.id}) }}" method="post">
+                            <button class="btn btn-danger delete-item" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+    <hr>
+    <a href="{{ path("admin_add_product") }}" class="btn btn-success">Add new product <span
+                class="glyphicon glyphicon-plus-sign"></span></a>
+{% endblock %}
+

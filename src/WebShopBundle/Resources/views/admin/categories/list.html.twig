@@ -24,9 +24,9 @@
                 </td>
                 <td>
                     {% if category.products|length == 0 %}
-                    <form action="{{ path("admin_delete_category", {"id": category.id}) }}" method="post">
-                        <button class="btn btn-danger delete-item" type="submit">Delete</button>
-                    </form>
+                        <form action="{{ path("admin_delete_category", {"id": category.id}) }}" method="post">
+                            <button class="btn btn-danger delete-item" type="submit">Delete</button>
+                        </form>
                     {% else %}
                         <button class="btn btn-default disabled" type="submit">Delete</button>
                     {% endif %}
