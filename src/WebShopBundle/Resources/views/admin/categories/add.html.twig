@@ -1,0 +1,15 @@
+{% extends '@WebShop/base.html.twig' %}
+
+{% block main_title %}Add new product category{% endblock %}
+
+{% block main %}
+    {{ form_start(add_form) }}
+
+    {{ form_row(add_form.name) }}
+
+    <button class="btn btn-success" formnovalidate>Add <span class="glyphicon glyphicon-plus-sign"></span>
+    </button>
+
+    {{ form_end(add_form) }}
+{% endblock %}
+

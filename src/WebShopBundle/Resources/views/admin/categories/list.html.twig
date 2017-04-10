@@ -1,0 +1,42 @@
+{% extends '@WebShop/base.html.twig' %}
+
+{% block main_title %}Categories{% endblock %}
+
+{% block main %}
+    <table class="table table-responsive table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Products count</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.products|length }}</td>
+                <td>
+                    <a href="{{ path("admin_edit_category", {"id": category.id}) }}" class="btn btn-warning">Edit</a>
+                </td>
+                <td>
+                    {% if category.products|length == 0 %}
+                    <form action="{{ path("admin_delete_category", {"id": category.id}) }}" method="post">
+                        <button class="btn btn-danger delete-item" type="submit">Delete</button>
+                    </form>
+                    {% else %}
+                        <button class="btn btn-default disabled" type="submit">Delete</button>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <a href="{{ path("admin_add_category") }}" class="btn btn-success">Add new category <span
+                class="glyphicon glyphicon-plus-sign"></span></a>
+{% endblock %}
+

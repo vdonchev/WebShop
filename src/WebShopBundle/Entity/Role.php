@@ -4,6 +4,7 @@ namespace WebShopBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\Role\RoleInterface;
 
 /**
@@ -11,6 +12,7 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
  *
  * @ORM\Table(name="role")
  * @ORM\Entity(repositoryClass="WebShopBundle\Repository\RoleRepository")
+ * @UniqueEntity(fields={"name"})
  */
 class Role implements RoleInterface
 {

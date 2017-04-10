@@ -2,13 +2,17 @@
 
 namespace WebShopBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ProductCategory
  *
  * @ORM\Table(name="product_category")
  * @ORM\Entity(repositoryClass="WebShopBundle\Repository\ProductCategoryRepository")
+ * @UniqueEntity(fields={"name"}, message="A category with that name already exists.")
  */
 class ProductCategory
 {
@@ -25,6 +29,7 @@ class ProductCategory
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -37,8 +42,15 @@ class ProductCategory
 
     /**
      * @ORM\OneToMany(targetEntity="WebShopBundle\Entity\Product", mappedBy="category")
+     *
+     * @var Product[]|ArrayCollection $products
      */
     private $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     public function getId()
     {
