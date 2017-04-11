@@ -22,7 +22,8 @@
                                         class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
                             </button>
                         </form>
-                        <a href="#" class="btn btn-default" role="button">View details</a>
+                        <a href="{{ path("products_view_product", {"id": product.id}) }}" class="btn btn-default"
+                           role="button">View details</a>
                         </p>
                     </div>
                 </div>
