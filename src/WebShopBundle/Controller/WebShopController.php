@@ -10,7 +10,7 @@ class WebShopController extends Controller
     public function sidebarMenuAction()
     {
         $categories = $this->getDoctrine()->getRepository(ProductCategory::class)
-            ->findAll();
+            ->findBy([]);
         return $this->render("@WebShop/_categories_menu.html.twig", [
             "categories" => $categories
         ]);

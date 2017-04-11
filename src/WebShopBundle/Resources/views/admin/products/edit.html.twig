@@ -1,0 +1,20 @@
+{% extends '@WebShop/base.html.twig' %}
+
+{% block main_title %}Edit product{% endblock %}
+
+{% block main %}
+    {{ form_start(edit_form) }}
+
+    {{ form_row(edit_form.name) }}
+    {{ form_row(edit_form.description) }}
+    {{ form_row(edit_form.category) }}
+    {{ form_row(edit_form.imageFile) }}
+    {{ form_row(edit_form.quantity) }}
+    {{ form_row(edit_form.price) }}
+
+    <button class="btn btn-warning" formnovalidate>Edit <span class="glyphicon glyphicon-edit"></span>
+    </button>
+
+    {{ form_end(edit_form) }}
+{% endblock %}
+
