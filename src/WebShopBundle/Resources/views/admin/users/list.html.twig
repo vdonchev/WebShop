@@ -3,13 +3,18 @@
 {% block main_title %}View users{% endblock %}
 
 {% block main %}
+    <div class="text-right">
+        <a href="{{ path("admin_add_user") }}" class="btn btn-success">Add new user <span
+                    class="glyphicon glyphicon-plus-sign"></span></a>
+    </div>
+    <hr>
     <table class="table table-responsive table-striped">
         <thead>
         <tr>
             <th>#</th>
-            <th>Email</th>
-            <th>Full Name</th>
-            <th>Funds</th>
+            <th>{{ knp_pagination_sortable(users, 'Email', 'a.email') }}</th>
+            <th>{{ knp_pagination_sortable(users, 'Full Name', 'a.fullName') }}</th>
+            <th>{{ knp_pagination_sortable(users, 'Funds', 'a.funds') }}</th>
             <th>Roles</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -35,7 +40,8 @@
         {% endfor %}
         </tbody>
     </table>
-    <hr>
-    <a href="{{ path("admin_add_user") }}" class="btn btn-success">Add new user <span
-                class="glyphicon glyphicon-plus-sign"></span></a>
+    <div class="navigation text-center">
+        {{ knp_pagination_render(users) }}
+    </div>
+
 {% endblock %}

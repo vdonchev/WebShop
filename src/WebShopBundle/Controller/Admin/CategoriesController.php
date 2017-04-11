@@ -22,13 +22,21 @@ class CategoriesController extends Controller
 {
     /**
      * @Route("/categories", name="admin_list_categories")
+     * @param Request $request
      * @return Response
      */
-    public function listCategoriesAction()
+    public function listCategoriesAction(Request $request)
     {
+        $pager  = $this->get('knp_paginator');
+        $categories = $pager->paginate(
+            $this->getDoctrine()->getRepository(ProductCategory::class)
+                ->findAll(),
+            $request->query->getInt('page', 1),
+            5
+        );
+
         return $this->render("@WebShop/admin/categories/list.html.twig", [
-            "categories" => $this->getDoctrine()->getRepository(ProductCategory::class)
-                ->findAll()
+            "categories" => $categories
         ]);
     }
 

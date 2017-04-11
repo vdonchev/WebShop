@@ -3,16 +3,21 @@
 {% block main_title %}Products{% endblock %}
 
 {% block main %}
+    <p class="text-right">
+        <a href="{{ path("admin_add_product") }}" class="btn btn-success">Add new product <span
+                    class="glyphicon glyphicon-plus-sign"></span></a>
+    </p>
+    <hr>
     <table class="table table-responsive table-striped">
         <thead>
         <tr>
             <th>#</th>
             <th>Image</th>
-            <th>Name</th>
+            <th>{{ knp_pagination_sortable(products, 'Name', 'a.name') }}</th>
             <th>Description</th>
             <th>Category</th>
-            <th>Quantity</th>
-            <th>Price</th>
+            <th>{{ knp_pagination_sortable(products, 'Quantity', 'a.quantity') }}</th>
+            <th>{{ knp_pagination_sortable(products, 'Price', 'a.price') }}</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -43,8 +48,9 @@
         {% endif %}
         </tbody>
     </table>
-    <hr>
-    <a href="{{ path("admin_add_product") }}" class="btn btn-success">Add new product <span
-                class="glyphicon glyphicon-plus-sign"></span></a>
+    <div class="navigation text-center">
+        {{ knp_pagination_render(products) }}
+    </div>
+
 {% endblock %}
 

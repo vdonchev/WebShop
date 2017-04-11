@@ -3,11 +3,16 @@
 {% block main_title %}Categories{% endblock %}
 
 {% block main %}
+    <div class="text-right">
+        <a href="{{ path("admin_add_category") }}" class="btn btn-success">Add new category <span
+                    class="glyphicon glyphicon-plus-sign"></span></a>
+    </div>
+    <hr>
     <table class="table table-responsive table-striped">
         <thead>
         <tr>
             <th>#</th>
-            <th>Name</th>
+            <th>{{ knp_pagination_sortable(categories, 'Name', 'a.name') }}</th>
             <th>Products count</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -35,8 +40,8 @@
         {% endfor %}
         </tbody>
     </table>
-    <hr>
-    <a href="{{ path("admin_add_category") }}" class="btn btn-success">Add new category <span
-                class="glyphicon glyphicon-plus-sign"></span></a>
+    <div class="navigation text-center">
+        {{ knp_pagination_render(categories) }}
+    </div>
 {% endblock %}
 

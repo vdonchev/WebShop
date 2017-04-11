@@ -25,11 +25,17 @@ class ProductsController extends Controller
      *
      * @return Response
      */
-    public function listProductsAction()
+    public function listProductsAction(Request $request)
     {
+        $pager  = $this->get('knp_paginator');
+        $products = $pager->paginate(
+            $this->getDoctrine()->getRepository(Product::class)->findBy([], ["id" => "DESC"]),
+            $request->query->getInt('page', 1),
+            5
+        );
+
         return $this->render("@WebShop/admin/products/list.html.twig", [
-            "products" => $this->getDoctrine()->getRepository(Product::class)
-                ->findBy([], ["id" => "DESC"])
+            "products" =>$products
         ]);
     }
 

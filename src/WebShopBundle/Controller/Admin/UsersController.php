@@ -23,11 +23,18 @@ class UsersController extends Controller
     /**
      * @Route("/users", name="admin_list_users")
      * @Method("GET")
+     * @param Request $request
      * @return Response
      */
-    public function listUsersAction()
+    public function listUsersAction(Request $request)
     {
-        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        $pager  = $this->get('knp_paginator');
+        $users = $pager->paginate(
+            $this->getDoctrine()->getRepository(User::class)->findAll(),
+            $request->query->getInt('page', 1),
+            5
+        );
+
         return $this->render("@WebShop/admin/users/list.html.twig", [
             "users" => $users
         ]);
