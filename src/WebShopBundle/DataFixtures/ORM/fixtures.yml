@@ -20,6 +20,20 @@ WebShopBundle\Entity\ProductCategory:
     productCategory_10:
         name: Electronics
 
+WebShopBundle\Entity\Promotion:
+    promotion_1:
+        name: Summer Promo
+        discount: 15
+        duration: <dateTimeBetween("+1 day", "+60 days")>
+    promotion_2:
+        name: Loyality Club
+        discount: 25
+        duration: <dateTimeBetween("+1 day", "+60 days")>
+    promotion_3:
+        name: Total Sale
+        discount: 50
+        duration: <dateTimeBetween("+1 day", "+60 days")>
+
 WebShopBundle\Entity\Product:
     product_{1..20}:
         name: <product()> (<current()>)
@@ -29,6 +43,14 @@ WebShopBundle\Entity\Product:
         price: <randomFloat(2, 0.99, 1999)>
         category: '@productCategory_*'
         updatedAt: <datetime()>
+    product_2:
+        promotions: ["@promotion_1", "@promotion_2", "@promotion_3"]
+    product_5:
+        promotions: ["@promotion_*"]
+    product_10:
+        promotions: ["@promotion_*"]
+    product_15:
+        promotions: ["@promotion_*"]
 
 WebShopBundle\Entity\Role:
     role_1:

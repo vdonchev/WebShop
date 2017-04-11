@@ -95,9 +95,18 @@ class Product
      */
     private $users;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="WebShopBundle\Entity\Promotion", inversedBy="products")
+     * @ORM\JoinTable(name="product_promotions")
+     *
+     * @var ArrayCollection
+     */
+    private $promotions;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->promotions = new ArrayCollection();
     }
 
     public function getId()
@@ -229,6 +238,18 @@ class Product
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getPromotions()
+    {
+        return $this->promotions;
+    }
+
+    public function setPromotions($promotions)
+    {
+        $this->promotions = $promotions;
+
+        return $this;
     }
 }
 
