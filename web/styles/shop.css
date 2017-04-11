@@ -12,6 +12,7 @@ body {
     margin-bottom: 10px;
 }
 
-img.admin-image {
+img.admin-image, .cart-image {
    max-width: 100px;
+    max-height: 100px;
 }

@@ -20,11 +20,16 @@
                 {% endblock %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
-
                 {% if app.user %}
                     {% block nav_user %}
-                        <li><a href="{{ path("user_profile") }}">My Profile <span class="glyphicon glyphicon-user"></span></a></li>
-                        <li><a href="#">Cart <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                        <li><a href="{{ path("user_profile") }}">My Profile <span
+                                        class="glyphicon glyphicon-user"></span></a></li>
+                        <li><a href="{{ path("user_cart") }}">Cart <span
+                                        class="glyphicon glyphicon-shopping-cart"></span>
+                                {% if app.user.products|length > 0 %}
+                                    ({{ app.user.products|length }} Products)
+                                {% endif %}
+                            </a></li>
                         <li><a href="{{ path("security_logout") }}">Logout <span
                                         class="glyphicon glyphicon-arrow-right"></span></a></li>
                     {% endblock %}
@@ -32,7 +37,8 @@
                     {% block nav_guest %}
                         <li><a href="{{ path("security_login") }}">Login <span class="glyphicon glyphicon-lock"></span></a>
                         </li>
-                        <li><a href="{{ path("user_register") }}">Register <span class="glyphicon glyphicon-ok"></span></a></li>
+                        <li><a href="{{ path("user_register") }}">Register <span class="glyphicon glyphicon-ok"></span></a>
+                        </li>
                     {% endblock %}
                 {% endif %}
             </ul>

@@ -20,3 +20,7 @@ services:
             - [initRuntime, ['@twig']]
         tags:
             - { name: twig.extension }
+
+    web_shop.service.cart_service:
+        class: WebShopBundle\Service\CartService
+        autowire: true

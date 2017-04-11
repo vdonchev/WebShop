@@ -2,6 +2,7 @@
 
 namespace WebShopBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
@@ -86,6 +87,18 @@ class Product
      * @var \DateTime
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="WebShopBundle\Entity\User", mappedBy="products")
+     *
+     * @var ArrayCollection
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -199,6 +212,23 @@ class Product
     public function getImageName()
     {
         return $this->imageName;
+    }
+
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    public function setUsers($users)
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
 

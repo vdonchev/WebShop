@@ -1,0 +1,55 @@
+{% extends "@WebShop/base.html.twig" %}
+
+{% block main_title %}Your cart{% endblock %}
+
+{% block main %}
+    {% if cart|length > 0 %}
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Product</th>
+                <th>Remove</th>
+                <th class="text-right">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in cart %}
+                <tr class="{{ product.quantity == 0 ? "danger" : "" }}">
+                    <td><img class="cart-image" src="{{ vich_uploader_asset(product, "imageFile") }}" alt="Image"></td>
+                    <td>
+                        {{ product.name }}
+                        <p class="text-muted">In stock: {{ product.quantity }}</p>
+                        <p>
+                            <span
+                                    class="text-danger"><strong>{{ product.quantity == 0 ? "Out of stock!" : "" }}</strong></span>
+                        </p>
+                    </td>
+                    <td>
+                        <form method="post" action="{{ path("user_cart_update", {"id": product.id}) }}">
+                            <button type="submit" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </form>
+                    </td>
+                    <td class="text-right"><strong>€{{ product.price }}</strong></td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-right">
+                    Total: <strong>€{{ total }}</strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="text-right">
+            <a href="{{ path("user_cart_checkout") }}" class="btn btn-success btn-lg">Checkout <span
+                        class="glyphicon glyphicon-shopping-cart"></span></a>
+        </div>
+    {% else %}
+        <p>No products in your cart. Go shop something ;)</p>
+    {% endif %}
+{% endblock %}

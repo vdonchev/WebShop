@@ -1,31 +1,3 @@
-WebShopBundle\Entity\Role:
-    role_1:
-        name: ROLE_USER
-    role_2:
-        name: ROLE_EDITOR
-    role_3:
-        name: ROLE_ADMIN
-
-WebShopBundle\Entity\User:
-    user_1:
-        email: admin@videlin.eu
-        plainPassword: 123
-        fullName: Admin Account
-        funds: <randomFloat(2, 5000, 100000)>
-        role: ["@role_3", "@role_2"]
-    user_2:
-        email: editor@videlin.eu
-        plainPassword: 123
-        fullName: "Editor Account"
-        funds: <randomFloat(2, 5000, 100000)>
-        role: ["@role_2"]
-    user_{3..10}:
-        email: <email()>
-        fullName: <name()>
-        plainPassword: 123
-        funds: <randomFloat(2, 1000, 100000)>
-        role: ["@role_1"]
-
 WebShopBundle\Entity\ProductCategory:
     productCategory_1:
         name: Books
@@ -57,3 +29,34 @@ WebShopBundle\Entity\Product:
         price: <randomFloat(2, 0.99, 1999)>
         category: '@productCategory_*'
         updatedAt: <datetime()>
+
+WebShopBundle\Entity\Role:
+    role_1:
+        name: ROLE_USER
+    role_2:
+        name: ROLE_EDITOR
+    role_3:
+        name: ROLE_ADMIN
+
+WebShopBundle\Entity\User:
+    user_1:
+        email: admin@videlin.eu
+        plainPassword: 123
+        fullName: Admin Account
+        funds: <randomFloat(2, 5000, 100000)>
+        role: ["@role_3", "@role_2"]
+        products: ["@product_1", "@product_2", "@product_3", "@product_4"]
+    user_2:
+        email: editor@videlin.eu
+        plainPassword: 123
+        fullName: "Editor Account"
+        funds: <randomFloat(2, 5000, 100000)>
+        role: ["@role_2"]
+        products: ["@product_*"]
+    user_{3..10}:
+        email: <email()>
+        fullName: <name()>
+        plainPassword: 123
+        funds: <randomFloat(2, 1000, 100000)>
+        role: ["@role_1"]
+        products: ["@product_*"]

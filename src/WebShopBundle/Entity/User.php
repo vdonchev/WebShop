@@ -61,9 +61,18 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+     * @var Product[]|ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="WebShopBundle\Entity\Product", inversedBy="users")
+     * @ORM\JoinTable(name="cart")
+     */
+    private $products;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->products = new ArrayCollection();
 
         $this->funds = 2000;
     }
@@ -166,5 +175,17 @@ class User implements UserInterface
     public function addRole(Role $role)
     {
         $this->roles[] = $role;
+    }
+
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    public function setProducts($products)
+    {
+        $this->products = $products;
+
+        return $this;
     }
 }

@@ -10,13 +10,19 @@
                     <img src="{{ vich_uploader_asset(product, "imageFile") }}" alt="{{ product.name }}">
                     <div class="caption">
                         <h3>{{ product.name }}</h3>
+                        <p><strong>Quantity available: {{ product.quantity }}</strong></p>
                         <p>{{ product.description }}</p>
                         <div class="h2"><span class="label label-success">€{{ product.price }}</span></div>
+
                         <hr>
                         <p>
-                            <a href="#" class="btn btn-primary" role="button"><span
-                                        class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</a>
-                            <a href="#" class="btn btn-default" role="button">View details</a>
+                        <form method="post" action="{{ path("user_cart_add", {"id": product.id}) }}"
+                              style="display: inline-block">
+                            <button class="btn btn-primary" type="submit"><span
+                                        class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
+                            </button>
+                        </form>
+                        <a href="#" class="btn btn-default" role="button">View details</a>
                         </p>
                     </div>
                 </div>
