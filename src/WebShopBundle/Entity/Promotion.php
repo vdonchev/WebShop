@@ -5,6 +5,7 @@ namespace WebShopBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Promotion
@@ -28,6 +29,8 @@ class Promotion
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(min="3", minMessage="Promotion name should be at least 3 characters long.")
      */
     private $name;
 
@@ -35,6 +38,9 @@ class Promotion
      * @var int
      *
      * @ORM\Column(name="discount", type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Range(min="1", max="100")
+     * @Assert\Regex("/\d{1,2}/")
      */
     private $discount;
 
@@ -42,6 +48,9 @@ class Promotion
      * @var \DateTime
      *
      * @ORM\Column(name="duration", type="datetime")
+     * @Assert\GreaterThan("today")
+     * @Assert\NotBlank()
+     * @Assert\Date()
      */
     private $duration;
 
@@ -108,6 +117,11 @@ class Promotion
         $this->products = $products;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
 

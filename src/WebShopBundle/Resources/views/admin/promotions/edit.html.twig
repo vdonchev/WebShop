@@ -1,0 +1,17 @@
+{% extends '@WebShop/base.html.twig' %}
+
+{% block main_title %}Edit promotion{% endblock %}
+
+{% block main %}
+    {{ form_start(edit_form) }}
+
+    {{ form_row(edit_form.name) }}
+    {{ form_row(edit_form.discount) }}
+    {{ form_row(edit_form.duration) }}
+
+    <button class="btn btn-success" formnovalidate>Edit <span class="glyphicon glyphicon-plus-sign"></span>
+    </button>
+
+    {{ form_end(edit_form) }}
+{% endblock %}
+

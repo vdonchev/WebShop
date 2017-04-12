@@ -1,0 +1,51 @@
+{% extends '@WebShop/base.html.twig' %}
+
+{% block main_title %}Promotions{% endblock %}
+
+{% block main %}
+    <div class="text-right">
+        <a href="{{ path("admin_add_promotion") }}" class="btn btn-success">Add new promotion <span
+                    class="glyphicon glyphicon-plus-sign"></span></a>
+    </div>
+    <hr>
+    {% if promotions|length > 0 %}
+        <table class="table table-responsive table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>{{ knp_pagination_sortable(promotions, 'Name', 'a.name') }}</th>
+                <th>{{ knp_pagination_sortable(promotions, 'Discount', 'a.discount') }}</th>
+                <th>Expiration date</th>
+                <th>Products</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for promo in promotions %}
+                <tr>
+                    <td>{{ promo.id }}</td>
+                    <td>{{ promo.name }}</td>
+                    <td>{{ promo.discount }}%</td>
+                    <td>{{ promo.duration|date }}</td>
+                    <td>{{ promo.products|length }}</td>
+                    <td>
+                        <a href="{{ path("admin_edit_promotion", {"id": promo.id}) }}" class="btn btn-warning">Edit</a>
+                    </td>
+                    <td>
+                        <form action="{{ path("admin_delete_promotion", {"id": promo.id}) }}" method="post">
+                            <button class="btn btn-danger delete-item" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation text-center">
+            {{ knp_pagination_render(promotions) }}
+        </div>
+    {% else %}
+        <p>No promotions yet. Go add some ;)</p>
+    {% endif %}
+{% endblock %}
+

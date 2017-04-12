@@ -235,11 +235,6 @@ class Product
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->name;
-    }
-
     public function getPromotions()
     {
         return $this->promotions;
@@ -250,6 +245,11 @@ class Product
         $this->promotions = $promotions;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
 

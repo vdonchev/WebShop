@@ -1,21 +1,16 @@
 {% extends '@WebShop/base.html.twig' %}
 
-{% block main_title %}Add new product{% endblock %}
+{% block main_title %}Add new promotion{% endblock %}
 
 {% block main %}
     {{ form_start(add_form) }}
 
     {{ form_row(add_form.name) }}
-    {{ form_row(add_form.description) }}
-    {{ form_row(add_form.category) }}
-    {{ form_row(add_form.imageFile) }}
-    {{ form_row(add_form.quantity) }}
-    {{ form_row(add_form.price) }}
-    {{ form_row(add_form.promotions) }}
+    {{ form_row(add_form.discount) }}
+    {{ form_row(add_form.duration) }}
 
     <button class="btn btn-success" formnovalidate>Add <span class="glyphicon glyphicon-plus-sign"></span>
     </button>
 
     {{ form_end(add_form) }}
 {% endblock %}
-
