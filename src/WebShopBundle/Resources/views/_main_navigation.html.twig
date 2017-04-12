@@ -14,8 +14,7 @@
             <ul class="nav navbar-nav">
                 {% block nav_link %}
                     <li><a href="{{ path("homepage") }}">Home</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Categories</a></li>
+                    <li><a href="{{ path("products_list") }}">Products</a></li>
                     <li><a href="#">Promotions</a></li>
                 {% endblock %}
             </ul>

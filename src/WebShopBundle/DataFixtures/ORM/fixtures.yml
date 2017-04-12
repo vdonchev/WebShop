@@ -17,8 +17,22 @@ WebShopBundle\Entity\ProductCategory:
         name: Notebooks
     productCategory_9:
         name: Audio
-    productCategory_10:
-        name: Electronics
+    productCategory_11:
+        name: Medicine
+    productCategory_12:
+        name: Health
+    productCategory_13:
+        name: Music
+    productCategory_14:
+        name: CDs
+    productCategory_15:
+        name: Videos
+    productCategory_16:
+        name: XXX
+    productCategory_17:
+        name: Other
+    productCategory_18:
+        name: Software
 
 WebShopBundle\Entity\Promotion:
     promotion_1:
@@ -35,12 +49,12 @@ WebShopBundle\Entity\Promotion:
         duration: <dateTimeBetween("+1 day", "+60 days")>
 
 WebShopBundle\Entity\Product:
-    product_{1..20}:
+    product_{1..50}:
         name: <product()> (<current()>)
         description: <paragraph()>
         imageName: <productImage()>
         quantity: <numberBetween(0, 99)>
-        price: <randomFloat(2, 0.99, 1999)>
+        price: <randomFloat(2, 0.99, 499)>
         category: '@productCategory_*'
         updatedAt: <datetime()>
     product_2:
@@ -72,13 +86,13 @@ WebShopBundle\Entity\User:
         email: editor@videlin.eu
         plainPassword: 123
         fullName: "Editor Account"
-        funds: <randomFloat(2, 5000, 100000)>
+        funds: <randomFloat(2, 100, 1500)>
         role: ["@role_2"]
         products: ["@product_*"]
     user_{3..10}:
         email: <email()>
         fullName: <name()>
         plainPassword: 123
-        funds: <randomFloat(2, 1000, 100000)>
+        funds: <randomFloat(2, 100, 1000)>
         role: ["@role_1"]
         products: ["@product_*"]

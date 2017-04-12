@@ -32,7 +32,7 @@ class ProductsController extends Controller
         $pager  = $this->get('knp_paginator');
         /** @var ArrayCollection|Product[] $products */
         $products = $pager->paginate(
-            $this->getDoctrine()->getRepository(Product::class)->findBy([], ["id" => "DESC"]),
+            $this->getDoctrine()->getRepository(Product::class)->findAll(),
             $request->query->getInt('page', 1),
             5
         );
