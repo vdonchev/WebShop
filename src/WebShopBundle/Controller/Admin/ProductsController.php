@@ -2,12 +2,14 @@
 
 namespace WebShopBundle\Controller\Admin;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WebShopBundle\Entity\Product;
+use WebShopBundle\Entity\Promotion;
 use WebShopBundle\Form\AddProductForm;
 use WebShopBundle\Form\EditProductForm;
 
@@ -28,6 +30,7 @@ class ProductsController extends Controller
     public function listProductsAction(Request $request)
     {
         $pager  = $this->get('knp_paginator');
+        /** @var ArrayCollection|Product[] $products */
         $products = $pager->paginate(
             $this->getDoctrine()->getRepository(Product::class)->findBy([], ["id" => "DESC"]),
             $request->query->getInt('page', 1),

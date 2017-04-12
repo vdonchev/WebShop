@@ -159,6 +159,11 @@ class Product
 
     public function getPrice()
     {
+        if ($this->hasActivePromotion()) {
+            $discount = $this->price * $this->getActualPromotion()->getDiscount() / 100;
+            return $this->price - $discount;
+        }
+
         return $this->price;
     }
 
@@ -171,6 +176,7 @@ class Product
     {
         $this->category = $category;
     }
+
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the  update. If this
@@ -250,6 +256,43 @@ class Product
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Promotion|null
+     */
+    public function getActualPromotion()
+    {
+        $activePromotions = $this->promotions->filter(function (Promotion $p) {
+            return $p->getDuration() > new \DateTime("now");
+        });
+
+        if ($activePromotions->count() == 1) {
+            return $activePromotions->first();
+        }
+
+        $arr = $activePromotions->getValues();
+        usort($arr, function (Promotion $p1, Promotion $p2) {
+            return $p2->getDiscount() - $p1->getDiscount();
+        });
+
+        return $arr[0];
+    }
+
+    /**
+     * @return float
+     */
+    public function getOriginalPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasActivePromotion()
+    {
+        return $this->promotions->count() > 0;
     }
 }
 

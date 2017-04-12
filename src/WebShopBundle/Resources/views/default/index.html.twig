@@ -5,37 +5,45 @@
 {% block main %}
     {% if products|length > 0 %}
         <div class="row">
-            {% for index,product in products %}
-                {% if index % 3 == 0 and index > 0 %}
-                    </div>
-                    <div class="row">
-                {% else %}
+        {% for index,product in products %}
+            {% if index % 3 == 0 and index > 0 %}
+                </div>
+                <div class="row">
+            {% else %}
 
-                {% endif %}
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="{{ vich_uploader_asset(product, "imageFile") }}" alt="{{ product.name }}">
-                        <div class="caption">
-                            <h3>{{ product.name }}</h3>
-                            <p><strong>Quantity available: {{ product.quantity }}</strong></p>
-                            <p>{{ product.description }}</p>
-                            <div class="h3 text-center"><span class="label label-success">€{{ product.price }}</span>
+            {% endif %}
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="{{ vich_uploader_asset(product, "imageFile") }}" alt="{{ product.name }}">
+                    <div class="caption">
+                        <h3>{{ product.name }}</h3>
+                        <p><strong>Quantity available: {{ product.quantity }}</strong></p>
+                        <p>{{ product.description }}</p>
+                        {% if product.hasActivePromotion %}
+                            <div class="text-center"><strong>Promotion: {{ product.actualPromotion }}</strong></div>
+                            <div class="h4 text-center">
+                                <span class="text-danger"><s>{{ product.originalPrice }}</s></span>
                             </div>
-                            <hr>
-                            <p class="text-center">
-                            <form method="post" action="{{ path("user_cart_add", {"id": product.id}) }}"
-                                  style="display: inline-block">
-                                <button class="btn btn-primary" type="submit"><span
-                                            class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
-                                </button>
-                            </form>
-                            <a href="{{ path("products_view_product", {"id": product.id}) }}" class="btn btn-default"
-                               role="button">View details</a>
-                            </p>
+                        {% endif %}
+                        <div class="h3 text-center">
+                            <span class="label label-success">€{{ product.price|number_format(2) }}</span>
                         </div>
+
+                        <hr>
+                        <p class="text-center">
+                        <form method="post" action="{{ path("user_cart_add", {"id": product.id}) }}"
+                              style="display: inline-block">
+                            <button class="btn btn-primary" type="submit"><span
+                                        class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
+                            </button>
+                        </form>
+                        <a href="{{ path("products_view_product", {"id": product.id}) }}" class="btn btn-default"
+                           role="button">View details</a>
+                        </p>
                     </div>
                 </div>
-            {% endfor %}
+            </div>
+        {% endfor %}
         </div>
     {% endif %}
 {% endblock %}

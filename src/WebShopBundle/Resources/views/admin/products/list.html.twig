@@ -29,11 +29,22 @@
                     <td>{{ product.id }}</td>
                     <td><img src="{{ vich_uploader_asset(product, "imageFile") }}" class="admin-image"
                              alt="Product Image"></td>
-                    <td>{{ product.name }}</td>
+                    <td>
+                        <a href="{{ path("products_view_product", {"id": product.id}) }}">
+                            {{ product.name }}
+                        </a>
+                    </td>
                     <td>{{ product.description }}</td>
                     <td>{{ product.category }}</td>
                     <td>{{ product.quantity }}</td>
-                    <td>{{ product.price }}</td>
+                    <td>
+                        {% if product.hasActivePromotion %}
+                            <s>{{ product.originalPrice|number_format(2) }}</s>
+                            <span class="text-danger"><strong>{{ product.price|number_format(2) }}</strong></span>
+                        {% else %}
+                            {{ product.price|number_format(2) }}
+                        {% endif %}
+                    </td>
                     <td>
                         <a href="{{ path("admin_edit_product", {"id": product.id}) }}"
                            class="btn btn-warning">Edit</a>

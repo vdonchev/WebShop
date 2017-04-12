@@ -39,7 +39,7 @@ class Promotion
      *
      * @ORM\Column(name="discount", type="integer")
      * @Assert\NotBlank()
-     * @Assert\Range(min="1", max="100")
+     * @Assert\Range(min="1", max="99")
      * @Assert\Regex("/\d{1,2}/")
      */
     private $discount;
