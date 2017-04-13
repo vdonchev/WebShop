@@ -12,7 +12,7 @@
         <div class="col-md-8">
             <h2>Description:</h2>
             <p>{{ product.description }}</p>
-            <p>Category: <a href="#">{{ product.category }}</a></p>
+            <p>Category: <a href="{{ path("products_by_category", {"id": category_id}) }}">{{ product.category }}</a></p>
             <p>In stock: <strong>{{ product.quantity }}</strong></p>
             <div class="h2">
                 Price:

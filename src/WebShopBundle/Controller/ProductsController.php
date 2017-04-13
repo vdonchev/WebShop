@@ -73,8 +73,11 @@ class ProductsController extends Controller
      */
     public function viewProductAction(Product $product)
     {
+        /** @var ProductCategory $category */
+        $category = $product->getCategory();
         return $this->render("@WebShop/products/view_product.html.twig", [
-            "product" => $product
+            "product" => $product,
+            "category_id" => $category->getId()
         ]);
     }
 }

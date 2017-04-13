@@ -57,13 +57,13 @@ WebShopBundle\Entity\Product:
         price: <randomFloat(2, 0.99, 499)>
         category: '@productCategory_*'
         updatedAt: <datetime()>
-    product_2:
+    product_50:
         promotions: ["@promotion_1", "@promotion_2", "@promotion_3"]
     product_5:
         promotions: ["@promotion_*"]
     product_10:
         promotions: ["@promotion_*"]
-    product_15:
+    product_{40..45}:
         promotions: ["@promotion_*"]
 
 WebShopBundle\Entity\Role:

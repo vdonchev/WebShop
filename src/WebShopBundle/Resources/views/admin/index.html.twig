@@ -1,0 +1,57 @@
+{% extends '@WebShop/base.html.twig' %}
+
+{% block main_title %}Admin Control Panel{% endblock %}
+
+{% block main %}
+
+    {% if is_granted("ROLE_ADMIN") %}
+        <h2 class="h4">Admin Access</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><span class="h3">Users administration</span></div>
+                    <div class="panel-body">
+                        <a href="{{ path("admin_list_users") }}" class="btn btn-block btn-success">
+                            Administrate <span class="glyphicon-user glyphicon"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <h2 class="h4">Editor Access</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center"><span class="h3">Products administration</span></div>
+                <div class="panel-body">
+                    <a href="{{ path("admin_list_products") }}" class="btn btn-block btn-primary">
+                        Administrate <span class="glyphicon-shopping-cart glyphicon"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center"><span class="h3">Categories administration</span></div>
+                <div class="panel-body">
+                    <a href="{{ path("admin_list_categories") }}" class="btn btn-block btn-primary">
+                        Administrate <span class="glyphicon-inbox glyphicon"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center"><span class="h3">Promotions administration</span></div>
+                <div class="panel-body">
+                    <a href="{{ path("admin_list_promotions") }}" class="btn btn-block btn-primary">
+                        Administrate <span class="glyphicon-gift glyphicon"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

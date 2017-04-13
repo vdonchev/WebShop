@@ -1,0 +1,36 @@
+{% extends '@WebShop/base.html.twig' %}
+
+{% block main_title %}All active promotions{% endblock %}
+
+{% block main %}
+    {% if promotions|length > 0 %}
+        <table class="table table-responsive table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Discount</th>
+                <th>Expiration date</th>
+                <th>Products</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for index,promo in promotions %}
+                <tr>
+                    <td>
+                        <a href="{{ path("promotions_view", {"id": promo.id}) }}">
+                            {{ promo.name }}
+                        </a>
+                    </td>
+                    <td>-{{ promo.discount }}%</td>
+                    <td>{{ promo.duration|date }}</td>
+                    <td>{{ promo.products|length }}</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+        </ul>
+    {% else %}
+        <p>Sorry, no active promotions at this time. :(</p>
+    {% endif %}
+{% endblock %}

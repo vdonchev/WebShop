@@ -15,7 +15,12 @@
                 {% block nav_link %}
                     <li><a href="{{ path("homepage") }}">Home</a></li>
                     <li><a href="{{ path("products_list") }}">Products</a></li>
-                    <li><a href="#">Promotions</a></li>
+                    <li><a href="{{ path("promotions_list") }}">Promotions</a></li>
+                    {% if is_granted("ROLE_EDITOR") %}
+                        <li class="success">
+                            <a href="{{ path("admin_home") }}">Admin CP <span class="glyphicon glyphicon-king"></span></a>
+                        </li>
+                    {% endif %}
                 {% endblock %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
