@@ -1,0 +1,16 @@
+{% extends '@WebShop/base.html.twig' %}
+
+{% block main_title %}Add review{% endblock %}
+
+{% block main %}
+    {{ form_start(add_form) }}
+
+    {{ form_row(add_form.text) }}
+    {{ form_row(add_form.rating) }}
+
+    <button class="btn btn-success" formnovalidate>Add <span class="glyphicon glyphicon-plus-sign"></span>
+    </button>
+
+    {{ form_end(add_form) }}
+{% endblock %}
+

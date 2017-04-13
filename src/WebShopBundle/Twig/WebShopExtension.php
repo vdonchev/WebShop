@@ -8,6 +8,7 @@ class WebShopExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFilter('roles', [$this, 'rolesFilter']),
+            new \Twig_SimpleFilter('starRating', [$this, 'ratingFilter']),
         ];
     }
 
@@ -16,5 +17,20 @@ class WebShopExtension extends \Twig_Extension
         return join(", ", array_map(function ($role) {
             return ucfirst(strtolower(explode("_", $role)[1]));
         }, $roles));
+    }
+
+    public function ratingFilter($rating)
+    {
+        $rating = intval($rating);
+        if ($rating < 1 || $rating > 5) {
+            $rating = 1;
+        }
+
+        $res = str_repeat("<span class='glyphicon-star glyphicon'></span>", $rating);
+        $rating = 5 - $rating;
+
+        $res .= str_repeat("<span class='glyphicon-star-empty glyphicon'></span>", $rating);
+
+        return $res;
     }
 }

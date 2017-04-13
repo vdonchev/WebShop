@@ -96,3 +96,11 @@ WebShopBundle\Entity\User:
         funds: <randomFloat(2, 100, 1000)>
         role: ["@role_1"]
         products: ["@product_*"]
+
+WebShopBundle\Entity\Review:
+    review_{1..15}:
+        text: <paragraph()>
+        rating: <numberBetween(1,5)>
+        date: <dateTimeBetween("-6 months", "now")>
+        user: "@user_*"
+        product: "@product_*"

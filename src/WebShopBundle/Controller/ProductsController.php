@@ -5,11 +5,14 @@ namespace WebShopBundle\Controller;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use WebShopBundle\Entity\Product;
 use WebShopBundle\Entity\ProductCategory;
+use WebShopBundle\Entity\Review;
+use WebShopBundle\Form\ReviewForm;
 
 /**
  * Class ProductsController
@@ -37,7 +40,7 @@ class ProductsController extends Controller
         );
 
         return $this->render("@WebShop/products/list.html.twig", [
-            "products" =>$products
+            "products" => $products
         ]);
     }
 
@@ -60,7 +63,7 @@ class ProductsController extends Controller
         );
 
         return $this->render("@WebShop/products/list_by_category.html.twig", [
-            "products" =>$products,
+            "products" => $products,
             "category" => $category
         ]);
     }
@@ -73,11 +76,48 @@ class ProductsController extends Controller
      */
     public function viewProductAction(Product $product)
     {
+        /** @var Review[] $reviews */
+        $reviews = $product->getReviews();
+
         /** @var ProductCategory $category */
         $category = $product->getCategory();
         return $this->render("@WebShop/products/view_product.html.twig", [
             "product" => $product,
-            "category_id" => $category->getId()
+            "category_id" => $category->getId(),
+            "reviews" => $reviews
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/review", name="products_add_review")
+     * @Security(expression="is_granted('IS_AUTHENTICATED_FULLY')")
+     *
+     * @param Product $product
+     * @param Request $request
+     * @return Response
+     */
+    public function addReviewAction(Product $product, Request $request)
+    {
+        $form = $this->createForm(ReviewForm::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Review $review */
+            $review = $form->getData();
+
+            $review->setDate(new \DateTime());
+            $review->setUser($this->getUser());
+            $review->setProduct($product);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($review);
+            $em->flush();
+
+            $this->addFlash("success", "Review added!");
+
+            return $this->redirectToRoute("products_view_product", ["id" => $product->getId()]);
+        }
+        return $this->render("@WebShop/products/add_review.html.twig", [
+            "add_form" => $form->createView()
         ]);
     }
 }

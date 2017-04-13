@@ -69,10 +69,18 @@ class User implements UserInterface
      */
     private $products;
 
+    /**
+     * @ORM\OneToMany(targetEntity="WebShopBundle\Entity\Review", mappedBy="user")
+     *
+     * @var Review[]|ArrayCollection $reviews
+     */
+    private $reviews;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
         $this->products = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
 
         $this->funds = 2000;
     }
@@ -187,5 +195,10 @@ class User implements UserInterface
         $this->products = $products;
 
         return $this;
+    }
+
+    public function getReviews()
+    {
+        return $this->reviews;
     }
 }
