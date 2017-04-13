@@ -34,13 +34,6 @@ class ProductCategory
     private $name;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="deleted_on", type="datetime", nullable=true)
-     */
-    private $deletedOn;
-
-    /**
      * @ORM\OneToMany(targetEntity="WebShopBundle\Entity\Product", mappedBy="category")
      *
      * @var Product[]|ArrayCollection $products
@@ -67,18 +60,6 @@ class ProductCategory
     public function getName()
     {
         return $this->name;
-    }
-
-    public function setDeletedOn($deletedOn)
-    {
-        $this->deletedOn = $deletedOn;
-
-        return $this;
-    }
-
-    public function getDeletedOn()
-    {
-        return $this->deletedOn;
     }
 
     public function getProducts()

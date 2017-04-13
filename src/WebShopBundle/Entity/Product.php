@@ -170,7 +170,7 @@ class Product
     {
         if ($this->hasActivePromotion()) {
             $discount = $this->price * $this->getActualPromotion()->getDiscount() / 100;
-            return number_format($this->price - $discount, 2);
+            return $this->price - $discount;
         }
 
         return $this->price;

@@ -32,7 +32,7 @@ class ProductsController extends Controller
         $pager  = $this->get('knp_paginator');
         /** @var ArrayCollection|Product[] $products */
         $products = $pager->paginate(
-            $this->getDoctrine()->getRepository(Product::class)->findAll(),
+            $this->getDoctrine()->getRepository(Product::class)->findBy([], ["id" => "desc"]),
             $request->query->getInt('page', 1),
             5
         );
@@ -100,11 +100,10 @@ class ProductsController extends Controller
     /**
      * @Route("/products/delete/{id}", name="admin_delete_product")
      *
-     * @param Request $request
      * @param Product $product
      * @return Response
      */
-    public function deleteProductAction(Request $request, Product $product)
+    public function deleteProductAction(Product $product)
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($product);

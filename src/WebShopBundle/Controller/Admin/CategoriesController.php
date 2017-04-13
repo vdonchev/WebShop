@@ -30,7 +30,7 @@ class CategoriesController extends Controller
         $pager  = $this->get('knp_paginator');
         $categories = $pager->paginate(
             $this->getDoctrine()->getRepository(ProductCategory::class)
-                ->findAll(),
+                ->findBy([], ["name" => "asc"]),
             $request->query->getInt('page', 1),
             5
         );
