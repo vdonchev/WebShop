@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use WebShopBundle\Entity\ProductsOrder;
 use WebShopBundle\Entity\Role;
 use WebShopBundle\Entity\User;
 use WebShopBundle\Form\ProfileEditForm;
@@ -85,6 +86,7 @@ class UserController extends Controller
     {
         /** @var User $currentUser */
         $currentUser = $this->getUser();
+
         return $this->render("@WebShop/user/profile.html.twig", [
             "user" => $currentUser
         ]);

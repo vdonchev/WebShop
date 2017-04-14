@@ -28,6 +28,8 @@
                     {% block nav_user %}
                         <li><a href="{{ path("user_profile") }}">My Profile <span
                                         class="glyphicon glyphicon-user"></span></a></li>
+                        <li><a href="{{ path("user_orders") }}">My Orders <span
+                                        class="glyphicon glyphicon-inbox"></span></a></li>
                         <li><a href="{{ path("user_cart") }}">Cart <span
                                         class="glyphicon glyphicon-shopping-cart"></span>
                                 {% if app.user.products|length > 0 %}

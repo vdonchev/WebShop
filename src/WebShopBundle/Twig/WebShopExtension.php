@@ -9,6 +9,7 @@ class WebShopExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFilter('roles', [$this, 'rolesFilter']),
             new \Twig_SimpleFilter('starRating', [$this, 'ratingFilter']),
+            new \Twig_SimpleFilter('json_decode', [$this, 'jsonDecode']),
         ];
     }
 
@@ -32,5 +33,10 @@ class WebShopExtension extends \Twig_Extension
         $res .= str_repeat("<span class='glyphicon-star-empty glyphicon'></span>", $rating);
 
         return $res;
+    }
+
+    public function jsonDecode($str)
+    {
+        return json_decode($str);
     }
 }

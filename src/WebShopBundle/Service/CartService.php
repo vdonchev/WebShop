@@ -12,13 +12,16 @@ class CartService
 {
     private $entityManager;
     private $session;
+    private $orderService;
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        Session $session)
+        Session $session,
+        OrderService $orderService)
     {
         $this->entityManager = $entityManager;
         $this->session = $session;
+        $this->orderService = $orderService;
     }
 
     /**
@@ -102,16 +105,26 @@ class CartService
             return false;
         }
 
+        $productsPlainText = [];
         foreach ($cartProducts as $product) {
             $product->setQuantity($product->getQuantity() - 1);
             $user->getProducts()->removeElement($product);
+            $productsPlainText[] = $product->getName();
         }
 
         $user->setFunds($userFunds - $cartTotal);
 
+        // Create and persist order
+        $this->orderService->createOrder(
+            $user,
+            new \DateTime(),
+            $productsPlainText,
+            $cartTotal);
+
         $this->entityManager->persist($user);
         $this->entityManager->flush();
         $this->session->getFlashBag()->add("success", "Checkout completed! Enjoy your order!");
+
 
         return true;
     }

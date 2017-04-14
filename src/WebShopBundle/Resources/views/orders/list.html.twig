@@ -1,0 +1,14 @@
+{% extends '@WebShop/base.html.twig' %}
+
+{% block main_title %}My Orders{% endblock %}
+
+{% block main %}
+    {% if orders|length > 0 %}
+        {% for order in orders %}
+            {% include "@WebShop/_order.html.twig" with {"order": order} %}
+        {% endfor %}
+    {% else %}
+        <p>You don't have any orders yet. What are you waiting for? :)</p>
+    {% endif %}
+{% endblock %}
+
