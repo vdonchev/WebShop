@@ -15,14 +15,14 @@
             </thead>
             <tbody>
             {% for product in cart %}
-                <tr class="{{ product.quantity == 0 ? "danger" : "" }}">
+                <tr class="{{ product.quantity == 0 ? "out-of-stock" : "" }}">
                     <td><img class="cart-image" src="{{ vich_uploader_asset(product, "imageFile") }}" alt="Image"></td>
                     <td>
                         {{ product.name }}
                         <p class="text-muted">In stock: {{ product.quantity }}</p>
                         <p>
                             <span
-                                    class="text-danger"><strong>{{ product.quantity == 0 ? "Out of stock!" : "" }}</strong></span>
+                                    class=""><strong>{{ product.quantity == 0 ? "Out of stock!" : "" }}</strong></span>
                         </p>
                     </td>
                     <td>

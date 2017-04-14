@@ -16,3 +16,7 @@ img.admin-image, .cart-image {
     max-width: 100px;
     max-height: 100px;
 }
+
+.out-of-stock {
+    background: cornsilk;
+}

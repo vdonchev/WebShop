@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use WebShopBundle\Entity\Product;
 use WebShopBundle\Entity\User;
 
-class CartService
+class CartService implements CartServiceInterface
 {
     private $entityManager;
     private $session;
@@ -17,7 +17,7 @@ class CartService
     public function __construct(
         EntityManagerInterface $entityManager,
         Session $session,
-        OrderService $orderService)
+        OrderServiceInterface $orderService)
     {
         $this->entityManager = $entityManager;
         $this->session = $session;

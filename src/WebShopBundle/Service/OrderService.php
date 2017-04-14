@@ -3,11 +3,10 @@
 namespace WebShopBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
-use WebShopBundle\Entity\Product;
 use WebShopBundle\Entity\ProductsOrder;
 use WebShopBundle\Entity\User;
 
-class OrderService
+class OrderService implements OrderServiceInterface
 {
     private $entityManager;
 
