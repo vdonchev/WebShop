@@ -44,36 +44,30 @@ class WebShopFixtures implements FixtureInterface
     public function productImage()
     {
         $images = [
-            "IMG-04.jpg",
-            "IMG-03.jpg",
-            "IMG-02.jpg",
-            "IMG-01.png",
-            "IMG-00.png",
-            "IMG-27.jpg",
-            "IMG-26.jpg",
-            "IMG-25.jpg",
-            "IMG-24.jpg",
-            "IMG-23.jpg",
-            "IMG-22.jpg",
-            "IMG-21.jpg",
-            "IMG-20.jpg",
-            "IMG-19.png",
-            "IMG-18.png",
-            "IMG-17.jpg",
-            "IMG-16.jpg",
-            "IMG-15.png",
-            "IMG-14.png",
-            "IMG-13.png",
-            "IMG-12.png",
-            "IMG-11.png",
-            "IMG-10.png",
-            "IMG-09.jpg",
-            "IMG-08.jpg",
-            "IMG-07.jpg",
-            "IMG-06.jpg",
-            "IMG-05.jpg"
+            "PRODUCT_01.jpg",
+            "PRODUCT_02.jpg",
+            "PRODUCT_03.jpg",
+            "PRODUCT_04.jpg",
+            "PRODUCT_05.png",
+            "PRODUCT_06.png",
+            "PRODUCT_07.png",
+            "PRODUCT_08.png",
+            "PRODUCT_09.jpg",
+            "PRODUCT_10.jpg",
+            "PRODUCT_11.jpg",
+            "PRODUCT_12.jpg",
+            "PRODUCT_13.png",
         ];
 
-        return $images[array_rand($images)];
+        $image = $images[array_rand($images)];
+
+        $fileExt = explode(".", $image)[1];
+        $oldPath = __DIR__ . "/../../../../web/_install/{$image}";
+
+        $newImageName = uniqid() . "." . $fileExt;
+        $newPath = __DIR__ . "/../../../../web/static/products/" . $newImageName;
+
+        copy($oldPath, $newPath);
+        return $newImageName;
     }
 }

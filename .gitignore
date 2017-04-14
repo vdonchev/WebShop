@@ -15,4 +15,5 @@
 /vendor/
 /web/bundles/
 .idea
-/static/products
+!web/static/products
+web/static/products/*
