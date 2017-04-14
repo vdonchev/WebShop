@@ -10,7 +10,7 @@
         <meta name="author" content="V.Donchev">
     {% endblock %}
 
-    <title>{% block title %}WebShop Template{% endblock %}</title>
+    <title>{% block title %}My Awesome Symfony WebShop{% endblock %}</title>
 
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset("styles/bootstrap.min.css") }}">
@@ -27,20 +27,20 @@
 
     {# body #}
     <div class="row">
-        {# sidebar #}
-        <aside class="col-md-3">
-            {% block sideabr %}
-                {{ render(controller("WebShopBundle:WebShop:sidebarMenu")) }}
-            {% endblock %}
-        </aside>
-
         {# main #}
-        <main class="col-md-9">
+        <main class="col-md-9 col-md-push-3">
             <h1 class="h3">{% block main_title %}Latest products{% endblock %}</h1>
             <hr>
             {% block main %}
             {% endblock %}
         </main>
+
+        {# sidebar #}
+        <aside class="col-md-3 col-md-pull-9">
+            {% block sideabr %}
+                {{ render(controller("WebShopBundle:WebShop:sidebarMenu")) }}
+            {% endblock %}
+        </aside>
     </div>
 
     <hr>

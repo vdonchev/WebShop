@@ -1,5 +1,5 @@
 {% if is_granted("ROLE_EDITOR") %}
-    <nav class="nav nav-tabs">
+    <nav class="nav nav-tabs hidden-xs">
         <ul class="nav navbar-nav">
             {% block nav_admin %}
                 <li><a href="{{ path("admin_list_products") }}">Edit Products</a></li>
