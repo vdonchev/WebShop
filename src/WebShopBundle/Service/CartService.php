@@ -114,17 +114,17 @@ class CartService implements CartServiceInterface
 
         $user->setFunds($userFunds - $cartTotal);
 
-        // Create and persist order
-        $this->orderService->createOrder(
+        // Create order
+        $order = $this->orderService->createOrder(
             $user,
             new \DateTime(),
             $productsPlainText,
             $cartTotal);
 
+        $this->entityManager->persist($order);
         $this->entityManager->persist($user);
         $this->entityManager->flush();
         $this->session->getFlashBag()->add("success", "Checkout completed! Enjoy your order!");
-
 
         return true;
     }

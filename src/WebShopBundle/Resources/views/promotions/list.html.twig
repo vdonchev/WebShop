@@ -23,7 +23,7 @@
                     </td>
                     <td>-{{ promo.discount }}%</td>
                     <td>{{ promo.duration|date }}</td>
-                    <td>{{ promo.products|length }}</td>
+                    <td>{{ promo.productsWithActivePromo|length }}</td>
                 </tr>
             {% endfor %}
 

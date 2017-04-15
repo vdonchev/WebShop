@@ -29,7 +29,6 @@ class OrderService implements OrderServiceInterface
         $order->setTotal($total);
         $order->setVerified(false);
 
-        $this->entityManager->persist($order);
-        $this->entityManager->flush();
+        return $order;
     }
 }

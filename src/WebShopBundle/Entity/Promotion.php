@@ -123,5 +123,12 @@ class Promotion
     {
         return $this->name;
     }
+
+    public function getProductsWithActivePromo()
+    {
+        return $this->products->filter(function (Product $p) {
+            return $p->getActualPromotion()->getName() == $this->getName();
+        });
+    }
 }
 

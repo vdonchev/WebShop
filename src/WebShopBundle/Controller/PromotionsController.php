@@ -19,9 +19,12 @@ class PromotionsController extends Controller
      */
     public function listPromotionsAction()
     {
+        /** @var Promotion[]|ArrayCollection $promotions */
+        $promotions = $this->getDoctrine()->getRepository(Promotion::class)
+            ->findNotExpired();
+
         return $this->render("@WebShop/promotions/list.html.twig", [
-            "promotions" => $this->getDoctrine()->getRepository(Promotion::class)
-                ->findNotExpired()
+            "promotions" => $promotions
         ]);
     }
 
@@ -37,7 +40,7 @@ class PromotionsController extends Controller
         $pager = $this->get('knp_paginator');
         /** @var ArrayCollection|Product[] $products */
         $products = $pager->paginate(
-            $promotion->getProducts(),
+            $promotion->getProductsWithActivePromo(),
             $request->query->getInt('page', 1),
             6
         );
