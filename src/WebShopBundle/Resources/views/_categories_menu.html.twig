@@ -5,7 +5,7 @@
         {% for cat in categories %}
             <li class="list-group-item">
                 <span class="badge">{{ cat.products|length }}</span>
-                <a href="{{ path("products_by_category", {"id": cat.id}) }}">{{ cat.name }}</a>
+                <a href="{{ path("products_by_category", {"slug": cat.slug}) }}">{{ cat.name }}</a>
             </li>
         {% endfor %}
     {% else %}

@@ -50,7 +50,7 @@
                            class="btn btn-warning">Edit</a>
                     </td>
                     <td>
-                        <form action="{{ path("admin_delete_product", {"id": product.id}) }}" method="post">
+                        <form action="{{ path("admin_delete_product", {"slug": product.slug}) }}" method="post">
                             <button class="btn btn-danger delete-item" type="submit">Delete</button>
                         </form>
                     </td>

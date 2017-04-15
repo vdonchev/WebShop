@@ -45,7 +45,7 @@ class ProductsController extends Controller
     }
 
     /**
-     * @Route("/category/{id}", name="products_by_category")
+     * @Route("/category/{slug}", name="products_by_category")
      * @Method("GET")
      *
      * @param Request $request
@@ -69,7 +69,7 @@ class ProductsController extends Controller
     }
 
     /**
-     * @Route("/view/{id}", name="products_view_product")
+     * @Route("/view/{slug}", name="products_view_product")
      *
      * @param Product $product
      * @return Response
@@ -83,7 +83,7 @@ class ProductsController extends Controller
         $category = $product->getCategory();
         return $this->render("@WebShop/products/view_product.html.twig", [
             "product" => $product,
-            "category_id" => $category->getId(),
+            "category_slug" => $category->getSlug(),
             "reviews" => $reviews
         ]);
     }

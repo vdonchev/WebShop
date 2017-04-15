@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Product
@@ -110,6 +111,13 @@ class Product
      * @var Review[]|ArrayCollection $reviews
      */
     private $reviews;
+
+    /**
+     * @ORM\Column(nullable=false, type="string", unique=true)
+     * @Gedmo\Slug(fields={"name"})
+     * @var string $slug
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -265,6 +273,18 @@ class Product
     public function getReviews()
     {
         return $this->reviews;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 
     public function __toString()

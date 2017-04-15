@@ -67,7 +67,7 @@ class CategoriesController extends Controller
     }
 
     /**
-     * @Route("/categories/edit/{id}", name="admin_edit_category")
+     * @Route("/categories/edit/{slug}", name="admin_edit_category")
      * @param Request $request
      * @param ProductCategory $category
      * @return Response

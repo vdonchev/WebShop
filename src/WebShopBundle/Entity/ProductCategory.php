@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * ProductCategory
@@ -40,6 +41,13 @@ class ProductCategory
      */
     private $products;
 
+    /**
+     * @ORM\Column(nullable=false, type="string", unique=true)
+     * @Gedmo\Slug(fields={"name"})
+     * @var string $slug
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -70,6 +78,18 @@ class ProductCategory
     public function __toString()
     {
         return $this->getName();
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }
 
