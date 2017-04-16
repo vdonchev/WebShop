@@ -10,7 +10,7 @@ use WebShopBundle\Entity\Product;
 use WebShopBundle\Entity\ProductCategory;
 use WebShopBundle\Entity\Promotion;
 
-class PromotionsService
+class PromotionsService implements PromotionsServiceInterface
 {
     private $entityManager;
     private $session;
