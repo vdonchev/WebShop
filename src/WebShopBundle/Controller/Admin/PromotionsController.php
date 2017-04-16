@@ -8,10 +8,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use WebShopBundle\Entity\ProductCategory;
 use WebShopBundle\Entity\Promotion;
 use WebShopBundle\Form\AddEditPromotionForm;
 use WebShopBundle\Form\CategoryPromotionsForm;
+use WebShopBundle\Form\PromotionForm;
 
 /**
  * Class PromotionsController
@@ -132,6 +132,56 @@ class PromotionsController extends Controller
         }
 
         return $this->render("@WebShop/admin/promotions/add_category.html.twig", [
+            "add_form" => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/products", name="admin_add_promotion_to_all_products")
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function addPromotionToAllProductsAction(Request $request)
+    {
+        $form = $this->createForm(PromotionForm::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $promotion = $form->get("promotion")->getData();
+
+            $promoService = $this->get("web_shop.service.promotions_service");
+            $promoService->setPromotionToProducts($promotion);
+
+            return $this->redirectToRoute("admin_list_promotions");
+        }
+
+        return $this->render("@WebShop/admin/promotions/add_all.html.twig", [
+            "form_name" => "Add promotion to all Products",
+            "add_form" => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/products/remove", name="admin_remove_promotion_to_all_products")
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function removePromotionFromAllProductsAction(Request $request)
+    {
+        $form = $this->createForm(PromotionForm::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $promotion = $form->get("promotion")->getData();
+
+            $promoService = $this->get("web_shop.service.promotions_service");
+            $promoService->unsetPromotionToProducts($promotion);
+
+            return $this->redirectToRoute("admin_list_promotions");
+        }
+
+        return $this->render("@WebShop/admin/promotions/add_all.html.twig", [
+            "form_name" => "Remove promotion from all Products",
             "add_form" => $form->createView()
         ]);
     }

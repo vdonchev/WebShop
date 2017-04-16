@@ -292,6 +292,11 @@ class Product
         $this->promotions[] = $promotion;
     }
 
+    public function unsetPromotion(Promotion $promotion)
+    {
+        $this->promotions->removeElement($promotion);
+    }
+
     public function __toString()
     {
         return $this->name;
