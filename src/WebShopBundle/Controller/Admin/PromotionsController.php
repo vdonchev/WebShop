@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use WebShopBundle\Entity\ProductCategory;
 use WebShopBundle\Entity\Promotion;
 use WebShopBundle\Form\AddEditPromotionForm;
+use WebShopBundle\Form\CategoryPromotionsForm;
 
 /**
  * Class PromotionsController
@@ -29,7 +30,7 @@ class PromotionsController extends Controller
      */
     public function listPromotionsAction(Request $request)
     {
-        $pager  = $this->get('knp_paginator');
+        $pager = $this->get('knp_paginator');
         $promotions = $pager->paginate(
             $this->getDoctrine()->getRepository(Promotion::class)
                 ->findAll(),
@@ -107,6 +108,31 @@ class PromotionsController extends Controller
 
         return $this->render("@WebShop/admin/promotions/edit.html.twig", [
             "edit_form" => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/category", name="admin_add_promotion_to_category")
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function addPromotionToCategoryAction(Request $request)
+    {
+        $form = $this->createForm(CategoryPromotionsForm::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $promotion = $form->get("promotion")->getData();
+            $category = $form->get("category")->getData();
+
+            $promoService = $this->get("web_shop.service.promotions_service");
+            $promoService->setPromotionToCategory($promotion, $category);
+
+            return $this->redirectToRoute("admin_list_promotions");
+        }
+
+        return $this->render("@WebShop/admin/promotions/add_category.html.twig", [
+            "add_form" => $form->createView()
         ]);
     }
 }

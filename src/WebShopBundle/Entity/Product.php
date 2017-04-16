@@ -287,6 +287,11 @@ class Product
         return $this;
     }
 
+    public function setPromotion(Promotion $promotion)
+    {
+        $this->promotions[] = $promotion;
+    }
+
     public function __toString()
     {
         return $this->name;

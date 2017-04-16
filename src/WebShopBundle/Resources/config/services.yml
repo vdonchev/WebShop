@@ -17,6 +17,10 @@ services:
         class: WebShopBundle\Service\OrderService
         autowire: true
 
+    web_shop.service.promotions_service:
+        class: WebShopBundle\Service\PromotionsService
+        autowire: true
+
     # Twig
     web_shop.twig.web_shop_extension:
         class: WebShopBundle\Twig\WebShopExtension

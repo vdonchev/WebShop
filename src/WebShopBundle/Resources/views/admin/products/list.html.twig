@@ -30,7 +30,7 @@
                     <td><img src="{{ vich_uploader_asset(product, "imageFile") }}" class="admin-image"
                              alt="Product Image"></td>
                     <td>
-                        <a href="{{ path("products_view_product", {"id": product.id}) }}">
+                        <a href="{{ path("products_view_product", {"slug": product.slug}) }}">
                             {{ product.name }}
                         </a>
                     </td>
@@ -46,7 +46,7 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ path("admin_edit_product", {"id": product.id}) }}"
+                        <a href="{{ path("admin_edit_product", {"slug": product.slug}) }}"
                            class="btn btn-warning">Edit</a>
                     </td>
                     <td>

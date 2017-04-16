@@ -70,7 +70,7 @@ class ProductsController extends Controller
     }
 
     /**
-     * @Route("/products/edit/{id}", name="admin_edit_product")
+     * @Route("/products/edit/{slug}", name="admin_edit_product")
      *
      * @param Request $request
      * @param Product $product
@@ -98,7 +98,7 @@ class ProductsController extends Controller
     }
 
     /**
-     * @Route("/products/delete/{id}", name="admin_delete_product")
+     * @Route("/products/delete/{slug}", name="admin_delete_product")
      *
      * @param Product $product
      * @return Response

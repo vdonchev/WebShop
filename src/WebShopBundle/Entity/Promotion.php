@@ -119,16 +119,16 @@ class Promotion
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->name;
-    }
-
     public function getProductsWithActivePromo()
     {
         return $this->products->filter(function (Product $p) {
             return $p->getActualPromotion()->getName() == $this->getName();
         });
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
 
