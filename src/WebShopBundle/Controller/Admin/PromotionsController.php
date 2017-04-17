@@ -33,7 +33,7 @@ class PromotionsController extends Controller
         $pager = $this->get('knp_paginator');
         $promotions = $pager->paginate(
             $this->getDoctrine()->getRepository(Promotion::class)
-                ->findAll(),
+                ->findBy([], ["endDate" => "desc"]),
             $request->query->getInt('page', 1),
             5
         );

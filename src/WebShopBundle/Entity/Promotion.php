@@ -47,12 +47,27 @@ class Promotion
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="duration", type="datetime")
-     * @Assert\GreaterThan("today")
+     * @ORM\Column(name="start_date", type="datetime")
+     * @Assert\GreaterThan("-1 month")
      * @Assert\NotBlank()
      * @Assert\Date()
      */
-    private $duration;
+    private $startDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="end_date", type="datetime")
+     * @Assert\Expression(
+     *     "this.getEndDate() > this.getStartDate()",
+     *     message="End date should be greater or equal to start date!"
+     * )
+     *
+     * @Assert\GreaterThan("now")
+     * @Assert\NotBlank()
+     * @Assert\Date()
+     */
+    private $endDate;
 
     /**
      * @ORM\ManyToMany(targetEntity="WebShopBundle\Entity\Product", mappedBy="promotions")
@@ -95,16 +110,28 @@ class Promotion
         return $this->discount;
     }
 
-    public function setDuration($duration)
+    public function getStartDate()
     {
-        $this->duration = $duration;
+        return $this->startDate;
+    }
+
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
 
         return $this;
     }
 
-    public function getDuration()
+    public function setEndDate($endDate)
     {
-        return $this->duration;
+        $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    public function getEndDate()
+    {
+        return $this->endDate;
     }
 
     public function getProducts()
@@ -122,7 +149,8 @@ class Promotion
     public function getProductsWithActivePromo()
     {
         return $this->products->filter(function (Product $p) {
-            return $p->getActualPromotion()->getName() == $this->getName();
+            return $p->hasActivePromotion() &&
+                $p->getActualPromotion()->getName() == $this->getName();
         });
     }
 

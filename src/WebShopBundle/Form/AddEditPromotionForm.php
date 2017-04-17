@@ -18,7 +18,11 @@ class AddEditPromotionForm extends AbstractType
         $builder
             ->add("name")
             ->add("discount")
-            ->add("duration", DateType::class, [
+            ->add("startDate", DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+            ])
+            ->add("endDate", DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
             ]);

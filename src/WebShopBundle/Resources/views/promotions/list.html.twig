@@ -9,7 +9,8 @@
             <tr>
                 <th>Name</th>
                 <th>Discount</th>
-                <th>Expiration date</th>
+                <th>Start date</th>
+                <th>End date</th>
                 <th>Products</th>
             </tr>
             </thead>
@@ -22,14 +23,14 @@
                         </a>
                     </td>
                     <td>-{{ promo.discount }}%</td>
-                    <td>{{ promo.duration|date }}</td>
+                    <td>{{ promo.startDate|date }}</td>
+                    <td>{{ promo.endDate|date }}</td>
                     <td>{{ promo.productsWithActivePromo|length }}</td>
                 </tr>
             {% endfor %}
 
             </tbody>
         </table>
-        </ul>
     {% else %}
         <p>Sorry, no active promotions at this time. :(</p>
     {% endif %}

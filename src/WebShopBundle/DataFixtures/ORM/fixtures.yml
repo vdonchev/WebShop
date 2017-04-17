@@ -35,18 +35,11 @@ WebShopBundle\Entity\ProductCategory:
         name: Software
 
 WebShopBundle\Entity\Promotion:
-    promotion_1:
-        name: Summer Promo
-        discount: 15
-        duration: <dateTimeBetween("+1 day", "+60 days")>
-    promotion_2:
-        name: Loyality Club
-        discount: 25
-        duration: <dateTimeBetween("+1 day", "+60 days")>
-    promotion_3:
-        name: Total Sale
-        discount: 50
-        duration: <dateTimeBetween("+1 day", "+60 days")>
+    promotion_{1..5}:
+        name: <firstName()> Promo
+        discount: <numberBetween(1, 99)>
+        start_date: <dateTimeBetween("-7 day", "+2 days")>
+        end_date: <dateTimeBetween("+6 day", "+60 days")>
 
 WebShopBundle\Entity\Product:
     product_{1..50}:
@@ -58,13 +51,13 @@ WebShopBundle\Entity\Product:
         category: '@productCategory_*'
         updatedAt: <datetime()>
     product_50:
-        promotions: ["@promotion_1", "@promotion_2", "@promotion_3"]
+        promotions: "3x @promotion_*"
     product_5:
         promotions: ["@promotion_*"]
     product_10:
         promotions: ["@promotion_*"]
-    product_{40..45}:
-        promotions: ["@promotion_*"]
+    product_{30..45}:
+        promotions: "2x @promotion_*"
 
 WebShopBundle\Entity\Role:
     role_1:

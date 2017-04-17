@@ -15,7 +15,8 @@ class PromotionRepository extends EntityRepository
     public function findNotExpired()
     {
         return $this->createQueryBuilder("promo")
-            ->andWhere("promo.duration >= :now")
+            ->andWhere("promo.endDate >= :now")
+            ->andWhere("promo.startDate <= :now")
             ->setParameter("now", new \DateTime("now"))
             ->getQuery()
             ->execute();

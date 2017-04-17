@@ -78,7 +78,7 @@ class Product
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WebShopBundle\Entity\ProductCategory", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="WebShopBundle\Entity\ProductCategory", inversedBy="products", fetch="EXTRA_LAZY")
      * @Assert\NotBlank()
      */
     private $category;
@@ -307,9 +307,15 @@ class Product
      */
     public function getActualPromotion()
     {
-        $activePromotions = $this->promotions->filter(function (Promotion $p) {
-            return $p->getDuration() > new \DateTime("now");
-        });
+        $activePromotions = $this->promotions->filter(
+            function (Promotion $p) {
+                return $p->getEndDate() > new \DateTime("now") &&
+                    $p->getStartDate() <= new \DateTime("now");
+            });
+
+        if ($activePromotions->count() == 0) {
+            return null;
+        }
 
         if ($activePromotions->count() == 1) {
             return $activePromotions->first();
@@ -336,7 +342,7 @@ class Product
      */
     public function hasActivePromotion()
     {
-        return $this->promotions->count() > 0;
+        return $this->getActualPromotion() !== null;
     }
 }
 

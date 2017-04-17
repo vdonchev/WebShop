@@ -9,9 +9,11 @@
         <hr>
         <a href="{{ path("admin_add_promotion_to_category") }}" class="btn btn-default">Set promotion to category <span
                     class="glyphicon glyphicon-plus-sign"></span></a>
-        <a href="{{ path("admin_add_promotion_to_all_products") }}" class="btn btn-default">Set promotion to Products <span
+        <a href="{{ path("admin_add_promotion_to_all_products") }}" class="btn btn-default">Set promotion to Products
+            <span
                     class="glyphicon glyphicon-plus-sign"></span></a>
-        <a href="{{ path("admin_remove_promotion_to_all_products") }}" class="btn btn-danger">Unset promotion to Products <span
+        <a href="{{ path("admin_remove_promotion_to_all_products") }}" class="btn btn-danger">Unset promotion to
+            Products <span
                     class="glyphicon glyphicon-exclamation-sign"></span></a>
     </div>
     <hr>
@@ -22,7 +24,8 @@
                 <th>#</th>
                 <th>{{ knp_pagination_sortable(promotions, 'Name', 'a.name') }}</th>
                 <th>{{ knp_pagination_sortable(promotions, 'Discount', 'a.discount') }}</th>
-                <th>Expiration date</th>
+                <th>Start date</th>
+                <th>End date</th>
                 <th>Products</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -32,9 +35,15 @@
             {% for promo in promotions %}
                 <tr>
                     <td>{{ promo.id }}</td>
-                    <td>{{ promo.name }}</td>
+                    <td>
+                        {{ promo.name }}
+                        {% if promo.startDate > date('now') %}
+                            <span class="label label-warning">scheduled</span>
+                        {% endif %}
+                    </td>
                     <td>{{ promo.discount }}%</td>
-                    <td>{{ promo.duration|date }}</td>
+                    <td>{{ promo.startDate|date }}</td>
+                    <td>{{ promo.endDate|date }}</td>
                     <td>{{ promo.productsWithActivePromo|length }}</td>
                     <td>
                         <a href="{{ path("admin_edit_promotion", {"id": promo.id}) }}" class="btn btn-warning">Edit</a>
