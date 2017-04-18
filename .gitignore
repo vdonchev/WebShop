@@ -17,3 +17,4 @@
 .idea
 !web/static/products
 web/static/products/*
+!web/static/products/.gitkeep
