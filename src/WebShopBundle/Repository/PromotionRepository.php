@@ -3,6 +3,7 @@
 namespace WebShopBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * PromotionRepository
@@ -12,13 +13,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class PromotionRepository extends EntityRepository
 {
-    public function findNotExpired()
+    /**
+     * @return QueryBuilder
+     */
+    public function findNotExpiredQueryBuilder()
     {
-        return $this->createQueryBuilder("promo")
-            ->andWhere("promo.endDate >= :now")
-            ->andWhere("promo.startDate <= :now")
-            ->setParameter("now", new \DateTime("now"))
-            ->getQuery()
-            ->execute();
+        return $this->createQueryBuilder("promotion")
+            ->andWhere("promotion.endDate >= :now")
+            ->andWhere("promotion.startDate <= :now")
+            ->setParameter("now", new \DateTime("now"));
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function findByQueryBuilder()
+    {
+        return $this->createQueryBuilder("promotion");
     }
 }

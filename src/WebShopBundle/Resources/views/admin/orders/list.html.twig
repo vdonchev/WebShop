@@ -7,11 +7,11 @@
         <table class="table table-responsive table-striped">
             <thead>
             <tr>
-                <th>Date</th>
+                <th>{{ knp_pagination_sortable(orders, 'Date', 'products_order.date') }}</th>
                 <th>User</th>
-                <th>{{ knp_pagination_sortable(orders, 'Total', 'a.total') }}</th>
+                <th>{{ knp_pagination_sortable(orders, 'Total', 'products_order.total') }}</th>
                 <th>Products</th>
-                <th>{{ knp_pagination_sortable(orders, 'Status', 'a.verified') }}</th>
+                <th>{{ knp_pagination_sortable(orders, 'Status', 'products_order.verified') }}</th>
                 <th>Complete</th>
             </tr>
             </thead>

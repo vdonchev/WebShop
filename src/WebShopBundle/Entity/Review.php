@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Review
  *
  * @ORM\Table(name="review")
- * @ORM\Entity(repositoryClass="WebShopBundle\Repository\ReviewRepository")
+ * @ORM\Entity
  */
 class Review
 {

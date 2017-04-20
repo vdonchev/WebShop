@@ -21,11 +21,11 @@
         <table class="table table-responsive table-striped">
             <thead>
             <tr>
-                <th>#</th>
-                <th>{{ knp_pagination_sortable(promotions, 'Name', 'a.name') }}</th>
-                <th>{{ knp_pagination_sortable(promotions, 'Discount', 'a.discount') }}</th>
-                <th>Start date</th>
-                <th>End date</th>
+                <th>{{ knp_pagination_sortable(promotions, '#id', 'promotion.id') }}</th>
+                <th>{{ knp_pagination_sortable(promotions, 'Name', 'promotion.name') }}</th>
+                <th>{{ knp_pagination_sortable(promotions, 'Discount', 'promotion.discount') }}</th>
+                <th>{{ knp_pagination_sortable(promotions, 'Start Date', 'promotion.startDate') }}</th>
+                <th>{{ knp_pagination_sortable(promotions, 'End Date', 'promotion.endDate') }}</th>
                 <th>Products</th>
                 <th>Edit</th>
                 <th>Delete</th>

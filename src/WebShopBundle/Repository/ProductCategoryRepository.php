@@ -3,6 +3,7 @@
 namespace WebShopBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * ProductCategoryRepository
@@ -12,13 +13,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductCategoryRepository extends EntityRepository
 {
-
     public function getNonEmptyCategories()
     {
-        return $this->createQueryBuilder("cats")
-            ->join("cats.products", "products")
-            ->orderBy("cats.name", "ASC")
+        return $this->createQueryBuilder("product_category")
+            ->join("product_category.products", "products")
+            ->orderBy("product_category.name", "ASC")
             ->getQuery()
             ->execute();
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function findByQueryBuilder()
+    {
+        return $this->createQueryBuilder("product_category");
     }
 }

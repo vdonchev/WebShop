@@ -4,9 +4,17 @@
 
 {% block main %}
     {% if orders|length > 0 %}
+        <div class="navigation text-center">
+            {{ knp_pagination_render(orders) }}
+        </div>
+
         {% for order in orders %}
             {% include "@WebShop/_order.html.twig" with {"order": order} %}
         {% endfor %}
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(orders) }}
+        </div>
     {% else %}
         <p>You don't have any orders yet. What are you waiting for? :)</p>
     {% endif %}

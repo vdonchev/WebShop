@@ -11,10 +11,10 @@
     <table class="table table-responsive table-striped">
         <thead>
         <tr>
-            <th>#</th>
-            <th>{{ knp_pagination_sortable(users, 'Email', 'a.email') }}</th>
-            <th>{{ knp_pagination_sortable(users, 'Full Name', 'a.fullName') }}</th>
-            <th>{{ knp_pagination_sortable(users, 'Funds', 'a.funds') }}</th>
+            <th>{{ knp_pagination_sortable(users, '#id', 'user.id') }}</th>
+            <th>{{ knp_pagination_sortable(users, 'Email', 'user.email') }}</th>
+            <th>{{ knp_pagination_sortable(users, 'Full Name', 'user.fullName') }}</th>
+            <th>{{ knp_pagination_sortable(users, 'Funds', 'user.funds') }}</th>
             <th>Roles</th>
             <th>Edit</th>
             <th>Delete</th>

@@ -29,10 +29,12 @@ class UsersController extends Controller
     public function listUsersAction(Request $request)
     {
         $pager  = $this->get('knp_paginator');
+        /** @var User[] $users */
         $users = $pager->paginate(
-            $this->getDoctrine()->getRepository(User::class)->findAll(),
+            $this->getDoctrine()->getRepository(User::class)
+                ->findByQueryBuilder(),
             $request->query->getInt('page', 1),
-            5
+            6
         );
 
         return $this->render("@WebShop/admin/users/list.html.twig", [

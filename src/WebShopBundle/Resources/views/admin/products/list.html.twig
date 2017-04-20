@@ -11,13 +11,13 @@
     <table class="table table-responsive table-striped">
         <thead>
         <tr>
-            <th>#</th>
+            <th>{{ knp_pagination_sortable(products, '#id', 'product.id') }}</th>
             <th>Image</th>
-            <th>{{ knp_pagination_sortable(products, 'Name', 'a.name') }}</th>
+            <th>{{ knp_pagination_sortable(products, 'Name', 'product.name') }}</th>
             <th>Description</th>
             <th>Category</th>
-            <th>{{ knp_pagination_sortable(products, 'Quantity', 'a.quantity') }}</th>
-            <th>{{ knp_pagination_sortable(products, 'Price', 'a.price') }}</th>
+            <th>{{ knp_pagination_sortable(products, 'Quantity', 'product.quantity') }}</th>
+            <th>{{ knp_pagination_sortable(products, 'Price', 'product.price') }}</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>

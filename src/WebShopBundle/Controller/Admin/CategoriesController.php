@@ -30,9 +30,9 @@ class CategoriesController extends Controller
         $pager  = $this->get('knp_paginator');
         $categories = $pager->paginate(
             $this->getDoctrine()->getRepository(ProductCategory::class)
-                ->findBy([], ["name" => "asc"]),
+                ->findByQueryBuilder()->orderBy("product_category.name", "asc"),
             $request->query->getInt('page', 1),
-            5
+            10
         );
 
         return $this->render("@WebShop/admin/categories/list.html.twig", [

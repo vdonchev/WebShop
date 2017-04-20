@@ -2,6 +2,8 @@
 
 namespace WebShopBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
+
 /**
  * ProductsOrderRepository
  *
@@ -10,4 +12,11 @@ namespace WebShopBundle\Repository;
  */
 class ProductsOrderRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return QueryBuilder
+     */
+    public function findByQueryBuilder()
+    {
+        return $this->createQueryBuilder("products_order");
+    }
 }

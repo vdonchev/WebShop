@@ -20,3 +20,15 @@ img.admin-image, .cart-image {
 .out-of-stock {
     background: cornsilk;
 }
+
+a.asc, a.desc, a.sortable {
+    text-decoration: none !important;
+}
+
+a.asc:after {
+    content: "\2193";
+}
+
+a.desc:after {
+    content: "\2191";
+}

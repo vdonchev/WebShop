@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
  * Role
  *
  * @ORM\Table(name="role")
- * @ORM\Entity(repositoryClass="WebShopBundle\Repository\RoleRepository")
+ * @ORM\Entity
  * @UniqueEntity(fields={"name"})
  */
 class Role implements RoleInterface

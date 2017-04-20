@@ -30,7 +30,7 @@ class OrdersController extends Controller
         $pager = $this->get('knp_paginator');
         $orders = $pager->paginate(
             $this->getDoctrine()->getRepository(ProductsOrder::class)
-                ->findBy([], ["date" => "desc"]),
+                ->findByQueryBuilder()->orderBy("products_order.date", "desc"),
             $request->query->getInt('page', 1),
             5
         );

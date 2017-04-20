@@ -3,6 +3,7 @@
 namespace WebShopBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use WebShopBundle\Entity\ProductCategory;
 
 /**
  * ProductRepository
@@ -12,4 +13,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
+    public function findByQueryBuilder()
+    {
+        return $this->createQueryBuilder("product");
+    }
+
+    public function findAllByCategoryQueryBuilder(ProductCategory $category)
+    {
+        return $this->createQueryBuilder("product")
+            ->where("product.category = :cat")
+            ->setParameter("cat", $category);
+    }
 }

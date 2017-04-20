@@ -32,9 +32,11 @@ class ProductsController extends Controller
         $pager  = $this->get('knp_paginator');
         /** @var ArrayCollection|Product[] $products */
         $products = $pager->paginate(
-            $this->getDoctrine()->getRepository(Product::class)->findBy([], ["id" => "desc"]),
+            $this->getDoctrine()->getRepository(Product::class)
+                ->findByQueryBuilder()->orderBy("product.id", "desc"),
             $request->query->getInt('page', 1),
-            5
+            5,
+            ['defaultSortDirection' => 'asc']
         );
 
         return $this->render("@WebShop/admin/products/list.html.twig", [

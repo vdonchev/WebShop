@@ -15,13 +15,19 @@ class PromotionsController extends Controller
     /**
      * @Route("/promotions", name="promotions_list")
      *
+     * @param Request $request
      * @return Response
      */
-    public function listPromotionsAction()
+    public function listPromotionsAction(Request $request)
     {
+        $pager = $this->get('knp_paginator');
         /** @var Promotion[]|ArrayCollection $promotions */
-        $promotions = $this->getDoctrine()->getRepository(Promotion::class)
-            ->findNotExpired();
+        $promotions = $pager->paginate(
+            $this->getDoctrine()->getRepository(Promotion::class)
+                ->findNotExpiredQueryBuilder(),
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render("@WebShop/promotions/list.html.twig", [
             "promotions" => $promotions
