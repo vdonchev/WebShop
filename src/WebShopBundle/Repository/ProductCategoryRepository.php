@@ -17,6 +17,7 @@ class ProductCategoryRepository extends EntityRepository
     {
         return $this->createQueryBuilder("product_category")
             ->join("product_category.products", "products")
+            ->addSelect("products")
             ->orderBy("product_category.name", "ASC")
             ->getQuery()
             ->execute();
@@ -27,6 +28,8 @@ class ProductCategoryRepository extends EntityRepository
      */
     public function findByQueryBuilder()
     {
-        return $this->createQueryBuilder("product_category");
+        return $this->createQueryBuilder("product_category")
+            ->join("product_category.products", "products")
+            ->addSelect("products");
     }
 }

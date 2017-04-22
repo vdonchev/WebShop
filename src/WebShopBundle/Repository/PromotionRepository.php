@@ -19,6 +19,8 @@ class PromotionRepository extends EntityRepository
     public function findNotExpiredQueryBuilder()
     {
         return $this->createQueryBuilder("promotion")
+            ->join("promotion.products", "products")
+            ->addSelect("products")
             ->andWhere("promotion.endDate >= :now")
             ->andWhere("promotion.startDate <= :now")
             ->setParameter("now", new \DateTime("now"));
@@ -29,6 +31,8 @@ class PromotionRepository extends EntityRepository
      */
     public function findByQueryBuilder()
     {
-        return $this->createQueryBuilder("promotion");
+        return $this->createQueryBuilder("promotion")
+            ->join("promotion.products", "products")
+            ->addSelect("products");
     }
 }

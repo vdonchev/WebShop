@@ -70,7 +70,7 @@ class Promotion
     private $endDate;
 
     /**
-     * @ORM\ManyToMany(targetEntity="WebShopBundle\Entity\Product", mappedBy="promotions")
+     * @ORM\ManyToMany(targetEntity="WebShopBundle\Entity\Product", mappedBy="promotions", fetch="EXTRA_LAZY")
      *
      * @var ArrayCollection
      */
