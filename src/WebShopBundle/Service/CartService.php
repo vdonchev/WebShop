@@ -109,7 +109,14 @@ class CartService implements CartServiceInterface
         foreach ($cartProducts as $product) {
             $product->setQuantity($product->getQuantity() - 1);
             $user->getProducts()->removeElement($product);
-            $productsPlainText[] = $product->getName();
+            $productsPlainText[$product->getSlug()] = $product->getName();
+
+            /** @var User $seller */
+            $seller = $product->getSeller();
+            if ($seller) {
+                $seller->setFunds($seller->getFunds() + $product->getPrice());
+                $this->entityManager->persist($seller);
+            }
         }
 
         $user->setFunds($userFunds - $cartTotal);

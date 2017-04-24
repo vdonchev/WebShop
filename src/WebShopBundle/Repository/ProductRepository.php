@@ -13,15 +13,27 @@ use WebShopBundle\Entity\ProductCategory;
  */
 class ProductRepository extends EntityRepository
 {
+    public function findLastProducts($numberOfProducts)
+    {
+        return $this->createQueryBuilder("product")
+            ->andWhere("product.quantity > 0")
+            ->setMaxResults($numberOfProducts)
+            ->orderBy("product.id", "desc")
+            ->getQuery()
+            ->execute();
+    }
+
     public function findByQueryBuilder()
     {
-        return $this->createQueryBuilder("product");
+        return $this->createQueryBuilder("product")
+            ->where("product.quantity > 0");
     }
 
     public function findAllByCategoryQueryBuilder(ProductCategory $category)
     {
         return $this->createQueryBuilder("product")
-            ->where("product.category = :cat")
+            ->where("product.quantity > 0")
+            ->andWhere("product.category = :cat")
             ->setParameter("cat", $category);
     }
 }

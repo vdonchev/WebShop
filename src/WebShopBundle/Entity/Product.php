@@ -15,7 +15,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="product")
  * @ORM\Entity(repositoryClass="WebShopBundle\Repository\ProductRepository")
- * @UniqueEntity(fields={"name"}, message="A product with that name already exists.")
  * @Vich\Uploadable
  */
 class Product
@@ -32,7 +31,7 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255, unique=false)
      * @Assert\NotBlank()
      */
     private $name;
@@ -119,6 +118,11 @@ class Product
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="WebShopBundle\Entity\User", inversedBy="ownedProducts")
+     */
+    private $seller;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -174,6 +178,9 @@ class Product
         return $this;
     }
 
+    /**
+     * @return float
+     */
     public function getPrice()
     {
         if ($this->hasActivePromotion()) {
@@ -283,6 +290,25 @@ class Product
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getSeller()
+    {
+        return $this->seller;
+    }
+
+    public function setSeller($seller)
+    {
+        $this->seller = $seller;
+
+        return $this;
+    }
+
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

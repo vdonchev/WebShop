@@ -84,6 +84,11 @@ class User implements UserInterface
      */
     private $orders;
 
+    /**
+     * @ORM\OneToMany(targetEntity="WebShopBundle\Entity\Product", mappedBy="seller")
+     */
+    private $ownedProducts;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();

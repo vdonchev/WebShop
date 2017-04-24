@@ -117,7 +117,7 @@ class ProductsController extends Controller
 
             $this->addFlash("success", "Review added!");
 
-            return $this->redirectToRoute("products_view_product", ["id" => $product->getId()]);
+            return $this->redirectToRoute("products_view_product", ["slug" => $product->getSlug()]);
         }
         return $this->render("@WebShop/products/add_review.html.twig", [
             "add_form" => $form->createView()

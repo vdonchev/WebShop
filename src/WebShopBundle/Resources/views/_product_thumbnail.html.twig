@@ -14,6 +14,10 @@
             <span class="label label-success">€{{ product.price|number_format(2) }}</span>
         </div>
 
+        {% if product.seller %}
+            <hr>
+            <p class="bg-success img-rounded text-center">Seller: {{ product.seller.fullName }}</p>
+        {% endif %}
         <hr>
         <p class="text">
         <form method="post" action="{{ path("user_cart_add", {"id": product.id}) }}"

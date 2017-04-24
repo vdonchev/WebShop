@@ -1,0 +1,17 @@
+{% extends '@WebShop/base.html.twig' %}
+
+{% block main_title %}Sell a product{% endblock %}
+
+{% block main %}
+    {{ form_start(add_form) }}
+
+    {{ form_row(add_form.name) }}
+    {{ form_row(add_form.description) }}
+    {{ form_row(add_form.price) }}
+
+    <button class="btn btn-success" formnovalidate>Add <span class="glyphicon glyphicon-plus-sign"></span>
+    </button>
+
+    {{ form_end(add_form) }}
+{% endblock %}
+

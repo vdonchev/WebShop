@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
         return $this->render('WebShopBundle:default:index.html.twig', [
             "products" => $this->getDoctrine()->getRepository(Product::class)
-                ->findBy([], ["id" => "DESC"], 9)
+                ->findLastProducts(9)
         ]);
     }
 }
