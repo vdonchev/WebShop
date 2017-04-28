@@ -15,6 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
+    const INIT_FUNDS = 2000;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -96,7 +98,7 @@ class User implements UserInterface
         $this->reviews = new ArrayCollection();
         $this->orders = new ArrayCollection();
 
-        $this->funds = 2000;
+        $this->funds = self::INIT_FUNDS;
     }
 
     public function getUsername()

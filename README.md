@@ -13,7 +13,7 @@ Author:
 -------
 Videlin Donchev (vdonchev) www.videlin.eu
 
-#####Powered by:
+Powered by:
 * Symfony 3
 * MySQL
 * Bootstrap 3
