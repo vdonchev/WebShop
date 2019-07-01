@@ -9,10 +9,6 @@ course@***Softuni*** (2017-04)
 
 ---
 
-Author:
--------
-Videlin Donchev (vdonchev) www.videlin.eu
-
 Powered by:
 * Symfony 3
 * MySQL
