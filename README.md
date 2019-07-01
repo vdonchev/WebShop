@@ -37,8 +37,4 @@ Requirements: **composer**, **MySql server**
     * Admin account: `admin@videlin.eu`, pass: `123`
     * Editor account: `editor@videlin.eu`, pass: `123`
     
----
-
-Live demo:
-----------
-https://symfony.videlin.eu
+--
